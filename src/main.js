@@ -148,7 +148,8 @@ function initApp() {
     tulipFrame: loadTex('/assets/tulip_hero_frame.png'),
     tulipPetal: loadTex('/assets/tulip_petal.png'),
     sapphireSky: loadTex('/assets/sapphire_sky_panoramic.png'),
-    sapphireArch: loadTex('/assets/sapphire_cosmic_arch.png')
+    blueCloudsPanoramic: loadTex('/assets/blue_cloud_panoramic.png'),
+    blueCloudWatercolor: loadTex('/assets/blue_cloud_watercolor.png')
   };
 
   // Real Moments Polaroid Textures (Downloaded photos & dance video)
@@ -528,15 +529,40 @@ function initApp() {
 
   ch('Certified Menace');
 
-  // Celestial Sapphire Nebula Backdrop & Arches (Using user's uploaded cosmic blue)
-  const sapphireSky1 = pl(realTextures.sapphireSky, 54, 26, 0, 1.8, -48);
+  // Celestial Sapphire Backdrop & Painterly Blue Clouds (User's soft blue cumulus & watercolor clouds)
+  const sapphireSky1 = pl(realTextures.sapphireSky, 52, 26, 0, 1.8, -48);
   sapphireSky1.material.fog = false;
 
-  const arch1 = pl(realTextures.sapphireArch, 16.0, 14.2, 0, 3.8, -26);
-  arch1.material.fog = false;
+  const sapphireSky2 = pl(realTextures.sapphireSky, 52, 26, 0, 1.8, -74);
+  sapphireSky2.material.fog = false;
 
-  const arch2 = pl(realTextures.sapphireArch, 18.0, 16.0, 0, 4.2, -64);
-  arch2.material.fog = false;
+  // Layered 3D Blue Cloud Banks (Replacing odd arch with dreamy cloud banks)
+  const blueBank1 = pl(realTextures.blueCloudsPanoramic, 17.5, 9.8, 0, -2.4, -28);
+  blueBank1.material.fog = false;
+  blueBank1.userData = { y0: -2.4, ph: 0.6 };
+  bobs.push(blueBank1);
+
+  const bluePuff1 = pl(realTextures.blueCloudWatercolor, 6.2, 6.2, -5.2, 1.6, -22);
+  bluePuff1.material.fog = false;
+  bluePuff1.userData = { y0: 1.6, ph: 1.8 };
+  bobs.push(bluePuff1);
+
+  const bluePuff2 = pl(realTextures.blueCloudWatercolor, 6.4, 6.4, 5.0, 1.8, -34);
+  bluePuff2.scale.x = -1;
+  bluePuff2.material.fog = false;
+  bluePuff2.userData = { y0: 1.8, ph: 2.9 };
+  bobs.push(bluePuff2);
+
+  const blueBank2 = pl(realTextures.blueCloudsPanoramic, 18.0, 10.2, 0, -2.2, -66);
+  blueBank2.scale.x = -1;
+  blueBank2.material.fog = false;
+  blueBank2.userData = { y0: -2.2, ph: 1.4 };
+  bobs.push(blueBank2);
+
+  const bluePuff3 = pl(realTextures.blueCloudWatercolor, 5.8, 5.8, -4.8, 1.2, -60);
+  bluePuff3.material.fog = false;
+  bluePuff3.userData = { y0: 1.2, ph: 0.2 };
+  bobs.push(bluePuff3);
 
   // Golden stardust particles in the sapphire nebula
   pts(160, (a, i) => {
