@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import confetti from 'canvas-confetti';
 import { animate, spring, stagger } from 'motion';
+import Lenis from 'lenis';
 import { romanticAudio } from './audio.js';
 import { UNCUT_STORY, CARDS_DATA } from './storyData.js';
 import chatData from './chat-data.json';
@@ -19,8 +20,23 @@ Promise.all([
 
 function initApp() {
   const canvas = $('#c');
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  
+  // Ultra-Smooth Lenis physical inertial scroll engine
+  const lenis = new Lenis({
+    duration: isTouch ? 0.85 : 1.1,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1.05,
+    touchMultiplier: 1.5,
+    infinite: false,
+  });
+  window.__lenis = lenis;
+
   const R = new TH.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  R.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  R.setPixelRatio(Math.min(window.devicePixelRatio, isTouch ? 1.5 : 1.75));
   R.outputColorSpace = TH.SRGBColorSpace;
 
   const S = new TH.Scene();
@@ -908,6 +924,8 @@ function initApp() {
 
   const show = () => {
     ensureGrabHandle();
+    B.setAttribute('data-lenis-prevent', 'true');
+    lenis.stop();
     M.style.display = 'flex';
     X.style.display = 'block';
     isModalAnimating = true;
@@ -931,6 +949,7 @@ function initApp() {
     romanticAudio.unduck();
 
     isModalAnimating = true;
+    lenis.start();
     animate(B, { opacity: [1, 0], scale: [1, 0.94], y: [0, 16] }, { duration: 0.2, ease: 'easeInOut' });
     animate(X, { opacity: [1, 0] }, { duration: 0.15 });
     animate(M, { opacity: [1, 0] }, { duration: 0.22, ease: 'easeInOut' }).then(() => {
@@ -946,12 +965,21 @@ function initApp() {
     if (e.key === 'Escape') {
       hide();
       lightbox.style.display = 'none';
+      lenis.start();
     }
   });
 
   // Lightbox handlers
-  closeLightbox.onclick = () => { lightbox.style.display = 'none'; };
-  lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; };
+  closeLightbox.onclick = () => {
+    lightbox.style.display = 'none';
+    lenis.start();
+  };
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+      lenis.start();
+    }
+  };
 
   const openM = (title, text, realPhoto = null, videoSrc = null) => {
     B.innerHTML = '';
@@ -1102,7 +1130,8 @@ function initApp() {
       ['Read Our Full Uncut Story 📖', () => openM('Our Full Story', STORY.join('\n\n'))],
       ['Fly Through Our Universe Again 🌷', () => {
         hide();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (lenis) lenis.scrollTo(0, { duration: 1.2 });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
       }]
     ].forEach(([t, f]) => {
       const b = document.createElement('button');
@@ -1148,7 +1177,12 @@ function initApp() {
     b.title = `${i + 1}. ${t}`;
     b.onclick = () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({ top: BR[i] * maxScroll + 1, behavior: 'smooth' });
+      const targetTop = BR[i] * maxScroll + 1;
+      if (lenis) {
+        lenis.scrollTo(targetTop, { duration: 1.1 });
+      } else {
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      }
     };
     hud.appendChild(b);
   });
@@ -1221,28 +1255,43 @@ function initApp() {
     handlePick(e.clientX, e.clientY);
   });
 
-  // Issue 4: Dynamic cursor pointer feedback when hovering interactive elements
+  // Pre-allocated vectors & colors to completely eliminate runtime GC allocations
+  const camPos = new TH.Vector3();
+  const camLook = new TH.Vector3();
+  const tempBgColor = new TH.Color();
+
+  // Throttled 3D raycasting for zero input lag and 60/120fps fluid interaction
+  let raycastQueued = false;
   canvas.addEventListener('pointermove', (e) => {
-    mv.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
-    rc.setFromCamera(mv, cam);
-    const hit = rc.intersectObjects(pickable, true)[0];
-    canvas.style.cursor = hit ? 'pointer' : 'default';
+    targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
 
-    // Interactive tactile hover feedback for the romantic letter
-    if (ev) {
-      const isHoveringEv = hit && (hit.object === ev || hit.object.userData?.env);
-      const targetScale = isHoveringEv ? 1.05 : 1.0;
-      ev.scale.set(targetScale, targetScale, 1);
-    }
+    if (isTouch) return; // Touch devices skip hover raycasting for 100% frame stability
 
-    // Interactive tactile hover feedback for the hero tulip painting
-    if (tulipHeroGroup) {
-      const isHoveringTulip = hit && (hit.object.parent === tulipHeroGroup || hit.object.userData?.title?.includes('flower') || hit.object.userData?.title?.includes('Tulip'));
-      const baseScale = window.innerWidth < 768 ? 0.82 : 1.0;
-      const targetScale = isHoveringTulip ? baseScale * 1.05 : baseScale;
-      tulipHeroGroup.scale.set(targetScale, targetScale, 1);
+    if (!raycastQueued) {
+      raycastQueued = true;
+      requestAnimationFrame(() => {
+        raycastQueued = false;
+        mv.set(targetMouseX, targetMouseY);
+        rc.setFromCamera(mv, cam);
+        const hit = rc.intersectObjects(pickable, true)[0];
+        canvas.style.cursor = hit ? 'pointer' : 'default';
+
+        if (ev) {
+          const isHoveringEv = hit && (hit.object === ev || hit.object.userData?.env);
+          const targetScale = isHoveringEv ? 1.05 : 1.0;
+          ev.scale.set(targetScale, targetScale, 1);
+        }
+
+        if (tulipHeroGroup) {
+          const isHoveringTulip = hit && (hit.object.parent === tulipHeroGroup || hit.object.userData?.title?.includes('flower') || hit.object.userData?.title?.includes('Tulip'));
+          const baseScale = window.innerWidth < 768 ? 0.82 : 1.0;
+          const targetScale = isHoveringTulip ? baseScale * 1.05 : baseScale;
+          tulipHeroGroup.scale.set(targetScale, targetScale, 1);
+        }
+      });
     }
-  });
+  }, { passive: true });
 
   let touchStartX = 0;
   let touchStartY = 0;
@@ -1287,50 +1336,57 @@ function initApp() {
     [0.96, '#351640']  // Scene 6: Underneath It All — Pastel Lavender Twilight Dreamscape
   ].map(([p, c]) => [p, new TH.Color(c)]);
 
-  // Smoothstep cubic interpolation (Issue 9: eliminates sharp color banding)
+  // Smoothstep cubic interpolation
   const smoothstep = (min, max, value) => {
     const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
     return x * x * (3 - 2 * x);
   };
 
-  const bg = (p) => {
+  // Zero-allocation in-place color interpolation
+  const bg = (p, target) => {
     for (let i = 1; i < stops.length; i++) {
       if (p <= stops[i][0] || i === stops.length - 1) {
         const a = stops[i - 1];
         const b = stops[i];
         const t = smoothstep(a[0], b[0], p);
-        return a[1].clone().lerp(b[1], t);
+        target.copy(a[1]).lerp(b[1], t);
+        return target;
       }
     }
-    return stops[0][1];
+    target.copy(stops[0][1]);
+    return target;
   };
 
   const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-  // Main Render Loop
+  // Ultra-Smooth 60/120 FPS Main Render Loop
   function loop(ms) {
     requestAnimationFrame(loop);
 
-    const mx = document.documentElement.scrollHeight - window.innerHeight;
-    const p = mx > 0 ? window.scrollY / mx : 0;
+    // Update Lenis smooth physical inertial scroll
+    lenis.raf(ms);
 
-    // Smooth damping: ultra-smooth and gentle on mobile so touch swipes glide slowly
-    const isMobile = window.innerWidth < 768;
-    const damp = isMobile ? 0.026 : (sp > 0.68 && sp < 0.85 ? 0.035 : 0.055);
-    sp += (p - sp) * damp;
+    const mx = document.documentElement.scrollHeight - window.innerHeight;
+    const targetP = lenis ? (lenis.progress || 0) : (mx > 0 ? window.scrollY / mx : 0);
+
+    // Snappy, physical damping: tracks user gestures instantly without lag or disconnect
+    const damp = isTouch ? 0.09 : 0.13;
+    sp += (targetP - sp) * damp;
     const tt = sp * 0.93;
 
-    // Follow CatmullRom spline
-    cam.position.copy(curve.getPointAt(tt));
-    cam.lookAt(curve.getPointAt(Math.min(1, tt + 0.05)));
+    // Follow CatmullRom spline using pre-allocated vectors (zero garbage collection)
+    curve.getPointAt(tt, camPos);
+    curve.getPointAt(Math.min(1, tt + 0.05), camLook);
+    cam.position.copy(camPos);
+    cam.lookAt(camLook);
 
     // Subtle natural breathing roll
     cam.rotateZ(Math.sin(Math.PI * cl((sp - 0.02) / 0.12)) * 0.12);
 
-    // Dynamic background & fog
-    const c = bg(sp);
-    S.background.copy(c);
-    S.fog.color.copy(c);
+    // In-place dynamic background & fog updates
+    bg(sp, tempBgColor);
+    S.background.copy(tempBgColor);
+    S.fog.color.copy(tempBgColor);
     starM.opacity = cl(1 - Math.abs(sp - 0.66) / 0.16);
 
     // Update Caption & HUD Pill with Framer Motion spring transition
@@ -1351,7 +1407,7 @@ function initApp() {
     }
 
     // 3D Gatefold Card Doors Opening
-    open += ((gOpen || cam.position.z < -87 ? 1 : 0) - open) * 0.05;
+    open += ((gOpen || cam.position.z < -87 ? 1 : 0) - open) * 0.06;
     doors[0].rotation.y = -open * 2.09;
     doors[1].rotation.y = open * 2.09;
 
@@ -1364,25 +1420,23 @@ function initApp() {
     smoothMouseX += (targetMouseX - smoothMouseX) * 0.05;
     smoothMouseY += (targetMouseY - smoothMouseY) * 0.05;
 
-    // Fluid Physical Organic Cloud Billowing, Volumetric Breathing, and Depth Parallax
+    // Fluid Physical Cloud Billowing & Depth Parallax
+    const tC = ms * 0.001;
     allClouds.forEach((c) => {
       const u = c.userData;
       const ph = u.cloudPh;
-      const spd = u.speed;
+      const spd = u.speed || 0.001;
 
-      // Compound harmonic waves create realistic, undulating physical billowing
-      const wave1 = Math.sin(ms * spd + ph);
-      const wave2 = Math.cos(ms * spd * 0.65 + ph * 1.3);
-      const wave3 = Math.sin(ms * spd * 1.35 + ph * 0.7);
+      const w1 = Math.sin(tC * (spd * 800) + ph);
+      const w2 = Math.cos(tC * (spd * 600) + ph * 1.2);
 
-      const billowY = wave1 * u.driftAmpY + wave2 * (u.driftAmpY * 0.35);
-      const billowX = wave2 * u.driftAmpX + wave3 * (u.driftAmpX * 0.25);
-      const billowRot = Math.sin(ms * spd * 0.8 + ph) * u.rotAmp;
-      const breath = 1.0 + wave1 * u.breathAmp + wave3 * (u.breathAmp * 0.28);
+      const billowY = w1 * u.driftAmpY;
+      const billowX = w2 * u.driftAmpX;
+      const billowRot = w1 * u.rotAmp;
+      const breath = 1.0 + w1 * u.breathAmp;
 
-      // Distance-weighted depth parallax relative to camera position
       const distToCam = Math.max(1, Math.abs(c.position.z - cam.position.z));
-      const parallaxFactor = Math.min(0.55, 3.2 / distToCam);
+      const parallaxFactor = Math.min(0.4, 2.2 / distToCam);
 
       c.position.x = u.x0 + billowX + smoothMouseX * parallaxFactor;
       c.position.y = u.y0 + billowY + smoothMouseY * parallaxFactor;
