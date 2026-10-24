@@ -100,9 +100,12 @@ function initApp() {
     const aspect = w / h;
     cam.aspect = aspect;
 
+    const isTallPhone = aspect < 0.55;
+    const isMobile = aspect < 0.85;
+
     // Responsive FOV: wide enough on mobile so camera captures cards without clipping
     if (aspect < 1.0) {
-      cam.fov = Math.min(84, Math.max(60, 60 / Math.pow(aspect, 0.55)));
+      cam.fov = Math.min(84, Math.max(60, 60 / Math.pow(aspect, isTallPhone ? 0.48 : 0.55)));
     } else {
       cam.fov = 58;
     }
@@ -110,9 +113,8 @@ function initApp() {
 
     // Responsive horizontal distance and card scaling
     // On mobile, keep cards closer to camera track so they are centered, unobstructed and never cropped!
-    const isMobile = aspect < 0.85;
-    const sideDist = isMobile ? 1.05 : (aspect < 1.1 ? 1.65 : 2.6);
-    const cardScale = isMobile ? 0.75 : 1.0;
+    const sideDist = isTallPhone ? 0.92 : (isMobile ? 1.05 : (aspect < 1.1 ? 1.65 : 2.6));
+    const cardScale = isTallPhone ? 0.68 : (isMobile ? 0.75 : 1.0);
     const rotAmount = isMobile ? 0.08 : 0.35;
 
     allCards.forEach((m) => {
@@ -127,29 +129,24 @@ function initApp() {
     });
 
     if (gate) {
-      const gs = isMobile ? 0.78 : 1.0;
+      const gs = isTallPhone ? 0.65 : (isMobile ? 0.78 : 1.0);
       gate.scale.set(gs, gs, 1);
     }
 
     // Responsive layout for Finale (Scene 6: Romantic Letter centered over purple clouds)
     if (ev) {
-      if (isMobile) {
-        ev.position.set(0, 0, -183);
-        ev.scale.set(0.85, 0.85, 1);
-        if (cloudCenter) cloudCenter.position.set(0, -2.8, -184.2);
-      } else {
-        ev.position.set(0, 0, -183);
-        ev.scale.set(1.0, 1.0, 1);
-        if (cloudCenter) cloudCenter.position.set(0, -2.6, -184.2);
-      }
+      const es = isTallPhone ? 0.72 : (isMobile ? 0.85 : 1.0);
+      ev.position.set(0, 0, -183);
+      ev.scale.set(es, es, 1);
+      if (cloudCenter) cloudCenter.position.set(0, isTallPhone ? -3.0 : (isMobile ? -2.8 : -2.6), -184.2);
       ev.userData.y0 = ev.position.y;
     }
 
     if (tulipHeroGroup) {
-      const ts = isMobile ? 0.82 : 1.0;
+      const ts = isTallPhone ? 0.72 : (isMobile ? 0.82 : 1.0);
       tulipHeroGroup.scale.set(ts, ts, 1);
       if (cloudIntroCenter) {
-        cloudIntroCenter.position.set(0, isMobile ? -2.9 : -2.6, 3.2);
+        cloudIntroCenter.position.set(0, isTallPhone ? -3.1 : (isMobile ? -2.9 : -2.6), 3.2);
         cloudIntroCenter.userData.y0 = cloudIntroCenter.position.y;
       }
     }
@@ -922,6 +919,49 @@ function initApp() {
     }
   };
 
+  let sheetTouchStartY = 0;
+  let sheetCurrentDy = 0;
+  let isDraggingSheet = false;
+
+  B.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      const target = e.target;
+      const isHandle = target.classList?.contains('modal-grab-handle') || target.closest?.('.modal-grab-handle');
+      if (isHandle || B.scrollTop <= 0) {
+        sheetTouchStartY = e.touches[0].clientY;
+        sheetCurrentDy = 0;
+        isDraggingSheet = true;
+      } else {
+        isDraggingSheet = false;
+      }
+    }
+  }, { passive: true });
+
+  B.addEventListener('touchmove', (e) => {
+    if (isDraggingSheet && e.touches.length === 1) {
+      const dy = e.touches[0].clientY - sheetTouchStartY;
+      if (dy > 0 && B.scrollTop <= 0) {
+        sheetCurrentDy = dy;
+        B.style.transform = `translateY(${Math.min(dy, 180)}px)`;
+      } else {
+        sheetCurrentDy = 0;
+        B.style.transform = '';
+      }
+    }
+  }, { passive: true });
+
+  B.addEventListener('touchend', () => {
+    if (isDraggingSheet && sheetCurrentDy > 0) {
+      if (sheetCurrentDy > 75) {
+        hide();
+      } else {
+        animate(B, { y: [sheetCurrentDy, 0] }, { type: spring, damping: 24, stiffness: 400 });
+      }
+      sheetCurrentDy = 0;
+      isDraggingSheet = false;
+    }
+  }, { passive: true });
+
   const show = () => {
     ensureGrabHandle();
     B.setAttribute('data-lenis-prevent', 'true');
@@ -929,11 +969,12 @@ function initApp() {
     M.style.display = 'flex';
     X.style.display = 'block';
     isModalAnimating = true;
+    const isMobileSheet = window.innerWidth <= 768;
 
-    animate(M, { opacity: [0, 1] }, { duration: 0.25, ease: 'easeOut' });
+    animate(M, { opacity: [0, 1] }, { duration: 0.22, ease: 'easeOut' });
     animate(
       B,
-      { opacity: [0, 1], scale: [0.90, 1], y: [22, 0] },
+      { opacity: [0, 1], scale: [isMobileSheet ? 0.98 : 0.90, 1], y: [isMobileSheet ? 55 : 22, 0] },
       { type: spring, damping: 26, stiffness: 350 }
     ).then(() => {
       isModalAnimating = false;
@@ -950,11 +991,13 @@ function initApp() {
 
     isModalAnimating = true;
     lenis.start();
-    animate(B, { opacity: [1, 0], scale: [1, 0.94], y: [0, 16] }, { duration: 0.2, ease: 'easeInOut' });
+    const isMobileSheet = window.innerWidth <= 768;
+    animate(B, { opacity: [1, 0], scale: [1, isMobileSheet ? 0.98 : 0.94], y: [0, isMobileSheet ? 55 : 16] }, { duration: 0.2, ease: 'easeInOut' });
     animate(X, { opacity: [1, 0] }, { duration: 0.15 });
     animate(M, { opacity: [1, 0] }, { duration: 0.22, ease: 'easeInOut' }).then(() => {
       M.style.display = 'none';
       X.style.display = 'none';
+      B.style.transform = '';
       isModalAnimating = false;
     });
   };
@@ -1191,7 +1234,9 @@ function initApp() {
   const musicBtn = $('#music-btn');
   if (musicBtn) {
     romanticAudio.subscribe((on) => {
-      musicBtn.innerHTML = on ? '🎵 Mia &amp; Seb: On' : '🎵 Music: Off';
+      musicBtn.innerHTML = on
+        ? '<span class="btn-icon">🎵</span> <span class="btn-label-desktop">Mia &amp; Seb: On</span><span class="btn-label-mobile">Mia &amp; Seb</span>'
+        : '<span class="btn-icon">🎵</span> <span class="btn-label-desktop">Music: Off</span><span class="btn-label-mobile">Music</span>';
       musicBtn.classList.toggle('on', on);
       musicBtn.title = on
         ? 'Playing Mia & Seb’s Theme (La La Land) ♡ Click to Pause'
@@ -1399,6 +1444,9 @@ function initApp() {
         animate(cap, { opacity: [0, 1] }, { duration: 0.26, ease: 'easeOut' });
       });
       [...hud.children].forEach((b, i) => b.classList.toggle('on', i === si));
+      if (hud.children[si]) {
+        hud.children[si].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     }
 
     // Fade out scroll prompt as user begins scrolling

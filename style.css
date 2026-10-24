@@ -249,6 +249,14 @@ body {
   transform: scale(0.95);
 }
 
+.btn-label-desktop {
+  display: inline;
+}
+
+.btn-label-mobile {
+  display: none;
+}
+
 .hud-btn-pill.on {
   background: var(--accent);
   color: #ffffff;
@@ -2199,5 +2207,316 @@ body {
 .museum-close-btn:active {
   transform: scale(0.96);
 }
+
+/* ==========================================================================
+   INSANE LEVEL MOBILE RESPONSIVE SUITE (Apple HIG & WWDC Fluid Physics)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Dynamic Header Button Labels */
+  .btn-label-desktop {
+    display: none !important;
+  }
+  .btn-label-mobile {
+    display: inline !important;
+  }
+
+  /* Compact Top Controls Dock */
+  .top-controls {
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    right: calc(10px + env(safe-area-inset-right, 0px));
+    gap: 5px;
+    padding: 4px;
+    border-radius: 16px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .hud-btn-pill {
+    padding: 6px 10px;
+    min-height: 38px;
+    font-size: 14px;
+    gap: 4px;
+    border-radius: 12px;
+  }
+
+  /* Centered Fixed Dynamic Caption */
+  #cap {
+    top: calc(56px + env(safe-area-inset-top, 0px));
+    width: min(92vw, 420px);
+    font-size: clamp(16px, 4.4vw, 22px);
+    padding: 6px 14px;
+    border-radius: 16px;
+  }
+
+  /* Tactile Scroll Prompt Hint */
+  .scroll-hint {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    font-size: 16px;
+    padding: 5px 14px;
+  }
+
+  /* Bottom Chapter HUD Pill Dock with Snap Scroll */
+  #hud {
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    max-width: calc(100vw - 16px);
+    padding: 4px 6px;
+    gap: 4px;
+    border-radius: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #hud button {
+    scroll-snap-align: center;
+    font-size: 14px;
+    padding: 6px 10px;
+    min-height: 38px;
+    gap: 4px;
+  }
+
+  /* Authentic iOS Bottom Sheet Modal */
+  #m {
+    align-items: flex-end;
+    padding: 0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  #b {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 88dvh;
+    max-height: 88vh;
+    border-radius: 28px 28px 0 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    padding: 16px 18px calc(24px + env(safe-area-inset-bottom, 0px)) 18px;
+    font-size: clamp(18px, 4.2vw, 22px);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  .modal-grab-handle {
+    width: 44px;
+    height: 5px;
+    border-radius: 99px;
+    background: rgba(127, 82, 131, 0.28);
+    margin: 0 auto 16px auto;
+  }
+
+  /* Tactile Close Pill */
+  #x {
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 12px;
+    padding: 6px 14px;
+    font-size: 15px;
+    min-height: 38px;
+    min-width: 38px;
+  }
+
+  /* Modal Action Buttons */
+  .bt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .bt button {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+
+  /* Media Wrappers */
+  .modal-photo-wrap {
+    max-height: 250px;
+  }
+
+  .modal-photo-wrap img {
+    max-height: 250px;
+  }
+
+  .modal-video-wrap,
+  .modal-video-player {
+    max-height: 250px;
+  }
+
+  /* Fullscreen Lightbox */
+  #lightbox-img {
+    max-width: 95vw;
+    max-height: 82dvh;
+  }
+
+  /* Memory Museum Mobile Optimization */
+  .museum-wrap {
+    padding: 0;
+  }
+
+  .museum-header h2 {
+    font-size: clamp(22px, 5.5vw, 28px);
+  }
+
+  .museum-badge {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+
+  .museum-nav-scroll {
+    margin-bottom: 14px;
+  }
+
+  .museum-tab-btn {
+    font-size: 11px;
+    padding: 6px 11px;
+    min-height: 34px;
+    border-radius: 14px;
+  }
+
+  .wrapped-hero-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .wrapped-bento {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .wrapped-stat {
+    padding: 10px 12px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .dictionary-grid,
+  .detective-grid,
+  .chapters-grid,
+  .traditions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .dict-card,
+  .detective-card,
+  .chapter-summary-card,
+  .tradition-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .dict-term,
+  .det-title {
+    font-size: 20px;
+  }
+
+  .timeline-stream {
+    padding-left: 18px;
+  }
+
+  .timeline-dot {
+    left: -18px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .timeline-content {
+    padding: 12px 14px;
+  }
+
+  .timeline-title {
+    font-size: 19px;
+  }
+
+  .dialogue-line {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .search-suggestions {
+    gap: 4px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .search-suggestions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+
+  .capsule-letter-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .capsule-body {
+    font-size: clamp(18px, 4.4vw, 22px);
+  }
+
+  .jar-paper-note {
+    padding: 16px 16px;
+  }
+
+  .jar-note-quote {
+    font-size: clamp(18px, 4.4vw, 22px);
+  }
+}
+
+/* Ultra-Compact Smartphones (<= 480px) */
+@media (max-width: 480px) {
+  .top-controls {
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    right: calc(8px + env(safe-area-inset-right, 0px));
+    gap: 3px;
+    padding: 3px;
+  }
+
+  .hud-btn-pill {
+    padding: 5px 8px;
+    font-size: 13px;
+    min-height: 34px;
+    border-radius: 10px;
+  }
+
+  #cap {
+    top: calc(50px + env(safe-area-inset-top, 0px));
+    width: min(94vw, 360px);
+    font-size: clamp(15px, 4.2vw, 18px);
+    padding: 5px 12px;
+  }
+
+  #hud {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    padding: 3px 5px;
+    gap: 3px;
+  }
+
+  #hud button {
+    font-size: 13px;
+    padding: 5px 8px;
+    min-height: 36px;
+  }
+
+  #b {
+    padding: 14px 14px calc(22px + env(safe-area-inset-bottom, 0px)) 14px;
+    font-size: 18px;
+  }
+}
+
 
 
