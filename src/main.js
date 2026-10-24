@@ -1394,9 +1394,9 @@ function initApp() {
     BR.forEach((b, i) => { if (sp >= b) s = i; });
     if (s !== si) {
       si = s;
-      animate(cap, { opacity: [1, 0], y: [0, -6] }, { duration: 0.16 }).then(() => {
+      animate(cap, { opacity: [1, 0] }, { duration: 0.16 }).then(() => {
         cap.textContent = CAP[si];
-        animate(cap, { opacity: [0, 1], y: [6, 0] }, { type: spring, damping: 25, stiffness: 320 });
+        animate(cap, { opacity: [0, 1] }, { duration: 0.26, ease: 'easeOut' });
       });
       [...hud.children].forEach((b, i) => b.classList.toggle('on', i === si));
     }
