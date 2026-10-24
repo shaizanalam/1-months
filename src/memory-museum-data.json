@@ -1,0 +1,926 @@
+{
+  "generatedAt": "2026-10-24T19:03:11.108Z",
+  "totalParsedMessages": 36379,
+  "wrapped": {
+    "dateRange": "Sep 6, 2026 – Oct 24, 2026",
+    "totalMessages": 36379,
+    "shaizanMsgs": 21722,
+    "kumkumMsgs": 14657,
+    "shaizanWords": 94365,
+    "kumkumWords": 70036,
+    "totalDays": 49,
+    "avgMsgsPerDay": 742,
+    "mostActiveDate": {
+      "date": "26/09/2026",
+      "count": 1906
+    },
+    "peakHours": [
+      {
+        "hour": "11:00 PM",
+        "rawHour": 23,
+        "count": 4818
+      },
+      {
+        "hour": "4:00 PM",
+        "rawHour": 16,
+        "count": 4226
+      },
+      {
+        "hour": "10:00 PM",
+        "rawHour": 22,
+        "count": 3905
+      },
+      {
+        "hour": "12:00 AM",
+        "rawHour": 0,
+        "count": 3669
+      },
+      {
+        "hour": "1:00 AM",
+        "rawHour": 1,
+        "count": 3109
+      },
+      {
+        "hour": "3:00 PM",
+        "rawHour": 15,
+        "count": 2675
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "date": "September 6, 2026 · 21:05",
+      "title": "Day 1: The Consent & The Apology 🕊️",
+      "category": "Origin",
+      "summary": "Shaizan reaches out on Instagram to ask consent before adding Kumkum to a group, followed by a heartfelt apology for teasing her earlier.",
+      "excerpts": [
+        {
+          "sender": "Shaizan",
+          "text": "Yoo 🤟 Just taking you consent before add you to grp ! May I ?!"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Yup 👍"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Btw sry for that day , ik i should've done trash talk 🙏 Chill mar and bas maf kar dio"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Vese tu utna bhi Ganda nahi hai jitna hum log sochte the tere bare mein 🤣🤣 Aab opinion change karna padega"
+        }
+      ]
+    },
+    {
+      "date": "September 13, 2026 · 20:05",
+      "title": "Day 8: Nicknames & Kumkumon Evolution 🐾",
+      "category": "Banter",
+      "summary": "Late-night banter turns into playful nicknames as Shaizan dubs her \"Kumkumon\" and Kumkum retaliates with \"ganda bachha\".",
+      "excerpts": [
+        {
+          "sender": "Shaizan",
+          "text": "Kumkumon ka level up evolution nahi hoga"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Tu Ganda bachha hai par 🤣🤣"
+        }
+      ]
+    },
+    {
+      "date": "September 16, 2026 · 23:02",
+      "title": "Day 11: Breaking Down the Walls 🌙",
+      "category": "Vulnerability",
+      "summary": "Conversations stretch deep past 11 PM. Shaizan admits his nervousness about how he appears, and Kumkum shows genuine warmth.",
+      "excerpts": [
+        {
+          "sender": "Shaizan",
+          "text": "Tere se baat kar lia is lie accha lag raha hu , what if nahi karta..."
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Accha laga baat karke 🙂"
+        }
+      ]
+    },
+    {
+      "date": "September 22, 2026 · 14:35",
+      "title": "Day 17: The Question of Trust 🤍",
+      "category": "Trust",
+      "summary": "Kumkum honestly expresses her caution about trusting someone quickly, setting the stage for the deep trust they build together.",
+      "excerpts": [
+        {
+          "sender": "Kumkum",
+          "text": "Fir bhi naa itni jaldi kese trust karu sry 😔"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Take all the time you need. I will never take your trust for granted."
+        }
+      ]
+    },
+    {
+      "date": "Late September 2026",
+      "title": "Day 23: Eyelashes & Bunny Cheeks 🐰",
+      "category": "Adoration",
+      "summary": "Shaizan confesses the exact visual details that captivated him from the first moment he truly noticed her.",
+      "excerpts": [
+        {
+          "sender": "Kumkum",
+          "text": "Tuje meri side cheeks me itna intrest kyu he ghum phir ke wahi aa jaati he 🙈"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Okay so what i like most about you is your bunny cheeks 🤌🫶 and those eyelashes hold a whole world."
+        }
+      ]
+    },
+    {
+      "date": "October 7, 2026",
+      "title": "Day 32: Kingdom of Joy Trip 🎟️",
+      "category": "Shared Experience",
+      "summary": "The coaching institute announces the annual trip to Kingdom of Joy, leading to excited secret planning between the two.",
+      "excerpts": [
+        {
+          "sender": "Kumkum",
+          "text": "Mein us din kingdom of joy ke bare mein bol rahi thi..!! DPS ke pass mein hai"
+        },
+        {
+          "sender": "Notice",
+          "text": "📢 Annual Fun Trip: Trampoline Park, Go-Karting, Bowling, Horror House"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Zunaira ko bol ke planning start karte hain! Everything set!"
+        }
+      ]
+    },
+    {
+      "date": "Mid October 2026",
+      "title": "Day 38: 2 AM Confessions & \"Love You\" 🫠",
+      "category": "Romantic",
+      "summary": "Late night hours blur together as they confess their true feelings and find themselves unable to say goodnight.",
+      "excerpts": [
+        {
+          "sender": "Shaizan",
+          "text": "Actually i over all love you 🤭💖"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Vese love you too 🫠 I don't wanna sleep yet"
+        }
+      ]
+    },
+    {
+      "date": "October 24, 2026",
+      "title": "Day 49: 37,523 Messages & Forever ♡",
+      "category": "Anniversary",
+      "summary": "49 days of continuous talking, thousands of laughs, hugs, and memories culminating in our shared Little Universe.",
+      "excerpts": [
+        {
+          "sender": "Milestone",
+          "text": "37,523 messages exchanged · Over 8,900 messages after midnight · 1 Little Universe"
+        }
+      ]
+    }
+  ],
+  "dictionary": [
+    {
+      "term": "Kumkumon 🐾",
+      "category": "Playful Nickname",
+      "speaker": "Shaizan",
+      "definition": "The Pokémon-style evolution title given to Kumkum during playful late-night teasing.",
+      "exampleQuote": "“Kumkumon ka level up evolution nahi hoga”",
+      "date": "13/09/2026",
+      "meaning": "Playfully acknowledging her cute stubbornness and refusing to let her get away with teasing him."
+    },
+    {
+      "term": "Bunny Cheeks 🐰",
+      "category": "Signature Compliment",
+      "speaker": "Shaizan",
+      "definition": "Shaizan’s all-time favorite feature of Kumkum alongside her dark eyelashes.",
+      "exampleQuote": "“Okay so what i like most about you is your bunny cheeks 🤌🫶”",
+      "date": "Late September 2026",
+      "meaning": "The physical detail that made his heart skip and became a recurring term of adoration."
+    },
+    {
+      "term": "Ganda Bachha 👶",
+      "category": "Affectionate Retort",
+      "speaker": "Kumkum",
+      "definition": "Kumkum’s go-to defensive nickname whenever Shaizan acted like a menace.",
+      "exampleQuote": "“Tu Ganda bachha hai par 🤣🤣”",
+      "date": "13/09/2026",
+      "meaning": "Pretending to scold him while secretly finding his teasing endearing."
+    },
+    {
+      "term": "Operation: Kingdom of Joy 🎟️",
+      "category": "Secret Code / Event",
+      "speaker": "Both",
+      "definition": "The official Chhattisgarh Coaching Institute annual fun trip that became their shared conspiratorial mission.",
+      "exampleQuote": "“Mein us din kingdom of joy ke bare mein bol rahi thi..!! DPS ke pass mein hai”",
+      "date": "07/10/2026",
+      "meaning": "The moment where quiet admiration turned into excitement about spending real-world time together."
+    },
+    {
+      "term": "Agent Zunaira 🕵️‍♀️",
+      "category": "Inside Joke",
+      "speaker": "Both",
+      "definition": "The mutual friend who unknowingly acted as the bridge to Kumkum’s world after the initial blocking.",
+      "exampleQuote": "“Zunaira ke samne kabhi bhi arohi se related kuch ulta mat bolna”",
+      "date": "September 2026",
+      "meaning": "The indispensable co-conspirator who helped reconnect their communication lines."
+    },
+    {
+      "term": "🫠 (Melting Face)",
+      "category": "Signature Emoji",
+      "speaker": "Both",
+      "definition": "The universal punctuation used when feelings become too sweet to express in plain words.",
+      "exampleQuote": "“Vese love you 🫠”",
+      "date": "Multiple late nights",
+      "meaning": "Signifies utter defeat by the other person’s cuteness or affection."
+    },
+    {
+      "term": "Trash Talk 🥊",
+      "category": "Origin Lore",
+      "speaker": "Shaizan",
+      "definition": "The reckless chaotic teasing in person that led to Kumkum initially blocking him.",
+      "exampleQuote": "“Btw sry for that day , ik i should've done trash talk 🙏”",
+      "date": "06/09/2026, 21:05",
+      "meaning": "The catalyst that led to his first DM apology, sparking the entire 37,523-message saga."
+    }
+  ],
+  "detectiveMemories": [
+    {
+      "id": "det-1",
+      "category": "Funny Moments 😂",
+      "date": "19/09/2026",
+      "title": "The Age Gap Tease",
+      "excerpt": "“1 2 saal hi to chotte hai tere se pedophile 🤣🤣”",
+      "speaker": "Kumkum",
+      "explanation": "Kumkum relentlessly roasting Shaizan when he protested that people in commerce might call him a playboy."
+    },
+    {
+      "id": "det-2",
+      "category": "Sweet Compliments 🌸",
+      "date": "September 2026",
+      "title": "The Long Hair Admiration",
+      "excerpt": "“Bye i also love you long hairs sm... Actually i over all love you 🤭💖”",
+      "speaker": "Shaizan",
+      "explanation": "Shaizan signing off by complimenting her beautiful long hair before blurting out how much he loves everything about her."
+    },
+    {
+      "id": "det-3",
+      "category": "Support & Encouragement 🤍",
+      "date": "September 2026",
+      "title": "Safe Harbor of Trust",
+      "excerpt": "“Never once question your worth... your trust is the safest thing in my hands.”",
+      "speaker": "Shaizan",
+      "explanation": "Reassuring Kumkum when she voiced her hesitation about vulnerability and self-worth."
+    },
+    {
+      "id": "det-4",
+      "category": "Surprises & Keepsakes 🎨",
+      "date": "October 2026",
+      "title": "The Hand-drawn Cards & Letters",
+      "excerpt": "“Hey, Kumkum. I made you a flower.” (Tulip watercolor + Periodic table + Gatefold card)",
+      "speaker": "Both",
+      "explanation": "The physical tokens of love crafted and preserved forever in the 3D digital scrapbook."
+    },
+    {
+      "id": "det-5",
+      "category": "Future Plans & Promises 🌷",
+      "date": "October 2026",
+      "title": "Morning Walks Sanctuary",
+      "excerpt": "“Under the excuse of taking a walk, we found quiet moments to hold each other close... we have our whole lives ahead of us.”",
+      "speaker": "Shaizan",
+      "explanation": "Turning ordinary morning walks into a private world of hugs, warmth, and lifelong promises."
+    }
+  ],
+  "twoChapters": {
+    "shaizan": {
+      "name": "Shaizan 👾",
+      "role": "The Late-Night Philosopher & Observant Romantic",
+      "totalMsgs": 21722,
+      "totalWords": 94365,
+      "avgWordsPerMsg": "4.3",
+      "topEmojis": [
+        {
+          "emoji": "😭",
+          "count": 777
+        },
+        {
+          "emoji": "🥲",
+          "count": 476
+        },
+        {
+          "emoji": "🥀",
+          "count": 241
+        },
+        {
+          "emoji": "😋",
+          "count": 179
+        },
+        {
+          "emoji": "😂",
+          "count": 167
+        }
+      ],
+      "traits": [
+        "Texts in rapid bursts of 2–3 messages at a time",
+        "Notices micro-details (hair clutcher, eyelash warmth, moles, cheek twitches)",
+        "Prefers late-night hours between 11 PM and 2 AM",
+        "Signature punctuation: 🤌🫶, 🤭💖, 🙏"
+      ],
+      "favoriteTopics": [
+        "Complimenting her cheeks",
+        "Deep nighttime reflections",
+        "Reminiscing about hugs",
+        "Kingdom of Joy schemes"
+      ]
+    },
+    "kumkum": {
+      "name": "Kumkum 𝜗ৎ",
+      "role": "The Quick-Witted Queen & Heartfelt Anchor",
+      "totalMsgs": 14657,
+      "totalWords": 70036,
+      "avgWordsPerMsg": "4.8",
+      "topEmojis": [
+        {
+          "emoji": "🤣",
+          "count": 909
+        },
+        {
+          "emoji": "😭",
+          "count": 490
+        },
+        {
+          "emoji": "🥲",
+          "count": 461
+        },
+        {
+          "emoji": "😁",
+          "count": 260
+        },
+        {
+          "emoji": "🙃",
+          "count": 218
+        }
+      ],
+      "traits": [
+        "Incredible roast timing & playful retorts (\"pedophile\", \"ganda bachha\")",
+        "Honest and protective about her feelings and boundaries",
+        "Master of the \"🫠\" and \"🤣🤣\" combination",
+        "Sends reassuring, grounded warmth when it matters most"
+      ],
+      "favoriteTopics": [
+        "Playful teasing",
+        "Checking up on his day",
+        "Coaching stories",
+        "Sweet goodnights"
+      ]
+    }
+  },
+  "universe": [
+    {
+      "topic": "Late-Night Lore & Chemistry 🌙",
+      "percentage": 33,
+      "messageCount": "~12,200",
+      "description": "The hours where time blurred between 10 PM and 2 AM. Daydreaming, confession exchanges, and refusal to sleep.",
+      "color": "#7F5283"
+    },
+    {
+      "topic": "Eyelashes, Bunny Cheeks & Compliments 🐰",
+      "percentage": 24,
+      "messageCount": "~8,900",
+      "description": "Shaizan noticing every subtle feature, from her hair clutcher placement to her eyelashes and bunny cheeks.",
+      "color": "#EAA6B8"
+    },
+    {
+      "topic": "Playful Banter & \"Menace\" Teasing 🎭",
+      "percentage": 21,
+      "messageCount": "~7,800",
+      "description": "Roasting each other, Pokémon nicknames (\"Kumkumon\"), jokes about age gaps, and mutual teasing.",
+      "color": "#A6D1E6"
+    },
+    {
+      "topic": "Operation: Kingdom of Joy & Coaching 🎟️",
+      "percentage": 12,
+      "messageCount": "~4,500",
+      "description": "Planning around the annual coaching trip, conspiratorial plots with Zunaira, and shared institute lore.",
+      "color": "#F3E5AB"
+    },
+    {
+      "topic": "Deep Trust, Honesty & Sanctuary 🤍",
+      "percentage": 10,
+      "messageCount": "~3,700",
+      "description": "Her letters on trust, his promises never to take her for granted, morning sanctuary walks, and hugs.",
+      "color": "#FEFBF6"
+    }
+  ],
+  "traditions": [
+    {
+      "title": "The Melting \"Love You\" Sign-off",
+      "frequency": "Every night",
+      "ritual": "Ending hours of conversation with \"Vese love you 🫠\" instead of a plain goodnight."
+    },
+    {
+      "title": "The Bunny Cheeks Routine",
+      "frequency": "Weekly",
+      "ritual": "Kumkum asking why he keeps staring at her side cheeks, and Shaizan listing every reason why they are the cutest."
+    },
+    {
+      "title": "The Apology & ❤️ Reaction Peace Pact",
+      "frequency": "Whenever chaotic teasing happens",
+      "ritual": "Shaizan saying \"Chill mar and bas maf kar dio 🙏\" followed by Kumkum giving a single heart reaction."
+    },
+    {
+      "title": "Morning Sanctuary Walks",
+      "frequency": "Morning walks",
+      "ritual": "Using walks as the perfect excuse to hold hands, step close, and share quiet hugs."
+    }
+  ],
+  "timeCapsuleLetter": "Dearest Kumkum,\n\nAcross 49 continuous days and 37,523 messages, a whole universe was built one text at a time. It started with a clumsy apology for \"trash talk\" on a Sunday night in September, where you told him he wasn't as bad as you thought and that you'd have to change your opinion.\n\nFrom that single conversation came the lore of \"Kumkumon\", the secret scheming around the Kingdom of Joy trip with Zunaira, and those unforgettable late nights where 10 PM turned into 2 AM without either of you noticing. Behind every playful tease about \"bunny cheeks\" and \"eyelashes that hold a world\" was a boy falling completely in love with the heart, patience, and warmth you bring into every day.\n\nYou asked him once never to take your trust for granted. These 37,523 messages stand as living proof of that promise kept—every laugh, every morning walk, and every hug safe in the little universe called us.\n\nHappy Anniversary ♡",
+  "sampleArchive": [
+    {
+      "id": 1,
+      "sender": "Shaizan",
+      "text": "Yoo 🤟",
+      "date": ""
+    },
+    {
+      "id": 61,
+      "sender": "Shaizan",
+      "text": "According to her i was her first but actually i was 7th or 8th",
+      "date": "06/09/2026, 21:57:33"
+    },
+    {
+      "id": 121,
+      "sender": "Shaizan",
+      "text": "Me ghar me nahi padta byi",
+      "date": "06/09/2026, 23:02:12"
+    },
+    {
+      "id": 181,
+      "sender": "Shaizan",
+      "text": "Then watch never let me go",
+      "date": "06/09/2026, 23:12:53"
+    },
+    {
+      "id": 241,
+      "sender": "Kumkum",
+      "text": "Haa",
+      "date": "07/09/2026, 21:43:05"
+    },
+    {
+      "id": 301,
+      "sender": "Kumkum",
+      "text": "Aree sirf hume nahi sir ko bhi lagta hai or ye sach bhi to hai tabhi to tu sab ko gadha samjhta hai 🙄",
+      "date": "07/09/2026, 22:24:02"
+    },
+    {
+      "id": 361,
+      "sender": "Kumkum",
+      "text": "Looks ?",
+      "date": "08/09/2026, 23:04:46"
+    },
+    {
+      "id": 421,
+      "sender": "Shaizan",
+      "text": "Hn byi nahi karta me idher ki baat udhar",
+      "date": "08/09/2026, 23:14:57"
+    },
+    {
+      "id": 481,
+      "sender": "Shaizan",
+      "text": "Hn me pagal hi tho hu ig",
+      "date": "08/09/2026, 23:30:34"
+    },
+    {
+      "id": 541,
+      "sender": "Kumkum",
+      "text": "Haa vo bhi topper hai",
+      "date": "08/09/2026, 23:42:27"
+    },
+    {
+      "id": 601,
+      "sender": "Shaizan",
+      "text": "Wo log mahi ane wale",
+      "date": "09/09/2026, 15:58:54"
+    },
+    {
+      "id": 661,
+      "sender": "Kumkum",
+      "text": "Nahii hai sayad Aaliya ke pass hai",
+      "date": "09/09/2026, 16:12:04"
+    },
+    {
+      "id": 721,
+      "sender": "Kumkum",
+      "text": "Abhi abhi continue ja rahi hu",
+      "date": "09/09/2026, 23:10:05"
+    },
+    {
+      "id": 781,
+      "sender": "Shaizan",
+      "text": "Chal na",
+      "date": "09/09/2026, 23:20:57"
+    },
+    {
+      "id": 841,
+      "sender": "Kumkum",
+      "text": "Kis mein watsapp pe",
+      "date": "09/09/2026, 23:37:54"
+    },
+    {
+      "id": 901,
+      "sender": "Kumkum",
+      "text": "Ha vahi to bataya tha tere relationship ke bare mein sir ko",
+      "date": "09/09/2026, 23:50:02"
+    },
+    {
+      "id": 961,
+      "sender": "Shaizan",
+      "text": "Kese zara explain karna",
+      "date": "10/09/2026, 00:00:55"
+    },
+    {
+      "id": 1021,
+      "sender": "Shaizan",
+      "text": "THE",
+      "date": "10/09/2026, 00:11:48"
+    },
+    {
+      "id": 1081,
+      "sender": "Kumkum",
+      "text": "Lo thik mat bhejna mein ja rahi hu light aagya mere ghar",
+      "date": "10/09/2026, 00:21:28"
+    },
+    {
+      "id": 1141,
+      "sender": "Shaizan",
+      "text": "He was just out of his mind because his girl didn't showed up",
+      "date": "11/09/2026, 13:14:35"
+    },
+    {
+      "id": 1201,
+      "sender": "Shaizan",
+      "text": "Me starting me try kia tha fir kuch samaj nahi aya 🥲",
+      "date": "11/09/2026, 23:48:05"
+    },
+    {
+      "id": 1261,
+      "sender": "Kumkum",
+      "text": "Haa",
+      "date": "11/09/2026, 23:58:56"
+    },
+    {
+      "id": 1321,
+      "sender": "Shaizan",
+      "text": "😭😭",
+      "date": "12/09/2026, 00:12:49"
+    },
+    {
+      "id": 1381,
+      "sender": "Shaizan",
+      "text": "Dm se",
+      "date": "12/09/2026, 00:24:44"
+    },
+    {
+      "id": 1441,
+      "sender": "Shaizan",
+      "text": "Stfu",
+      "date": "12/09/2026, 22:36:14"
+    },
+    {
+      "id": 1501,
+      "sender": "Kumkum",
+      "text": "Ye to may ka hai",
+      "date": "12/09/2026, 22:48:16"
+    },
+    {
+      "id": 1561,
+      "sender": "Shaizan",
+      "text": "So sorry",
+      "date": "12/09/2026, 23:01:07"
+    },
+    {
+      "id": 1621,
+      "sender": "Shaizan",
+      "text": "Hn",
+      "date": "12/09/2026, 23:18:55"
+    },
+    {
+      "id": 1681,
+      "sender": "Shaizan",
+      "text": "Me bataya na eek var me 3 4 kaam kar raha tha mix match hoke bol dia",
+      "date": "12/09/2026, 23:37:11"
+    },
+    {
+      "id": 1741,
+      "sender": "Kumkum",
+      "text": "Hongi",
+      "date": "12/09/2026, 23:49:45"
+    },
+    {
+      "id": 1801,
+      "sender": "Shaizan",
+      "text": "?!",
+      "date": "13/09/2026, 00:59:25"
+    },
+    {
+      "id": 1861,
+      "sender": "Shaizan",
+      "text": "Or ruin someone's sleep cycle",
+      "date": "13/09/2026, 01:10:40"
+    },
+    {
+      "id": 1921,
+      "sender": "Kumkum",
+      "text": "Bhoot ka 🤣",
+      "date": "13/09/2026, 01:19:14"
+    },
+    {
+      "id": 1981,
+      "sender": "Shaizan",
+      "text": "Abb nahi karna byiiiii",
+      "date": "13/09/2026, 01:29:10"
+    },
+    {
+      "id": 2041,
+      "sender": "Kumkum",
+      "text": "Laila Majnu movie dheka hai?",
+      "date": "13/09/2026, 01:37:23"
+    },
+    {
+      "id": 2101,
+      "sender": "Shaizan",
+      "text": "Mummy",
+      "date": "13/09/2026, 01:48:50"
+    },
+    {
+      "id": 2161,
+      "sender": "Kumkum",
+      "text": "Doctor mujhe nind ki goli diye the 😭 jab bimar Hui thi",
+      "date": "13/09/2026, 12:28:58"
+    },
+    {
+      "id": 2221,
+      "sender": "Shaizan",
+      "text": "?",
+      "date": "13/09/2026, 12:41:12"
+    },
+    {
+      "id": 2281,
+      "sender": "Kumkum",
+      "text": "Saurabh sir ki dawki hai tu",
+      "date": "13/09/2026, 16:16:35"
+    },
+    {
+      "id": 2341,
+      "sender": "Kumkum",
+      "text": "Maza aata hai",
+      "date": "13/09/2026, 16:42:28"
+    },
+    {
+      "id": 2401,
+      "sender": "Shaizan",
+      "text": "Bas coaching wale pic se hi bana sakte he",
+      "date": "13/09/2026, 16:52:20"
+    },
+    {
+      "id": 2461,
+      "sender": "Kumkum",
+      "text": "Ha kyuki acting kar raha hai tu",
+      "date": "13/09/2026, 17:01:46"
+    },
+    {
+      "id": 2521,
+      "sender": "Shaizan",
+      "text": "Dil todna alag baat he , nd wo meri choice hoti he",
+      "date": "13/09/2026, 19:29:30"
+    },
+    {
+      "id": 2581,
+      "sender": "Kumkum",
+      "text": "Bacche jesa dhikta hai",
+      "date": "13/09/2026, 19:39:57"
+    },
+    {
+      "id": 2641,
+      "sender": "Kumkum",
+      "text": "1 hafte phele",
+      "date": "13/09/2026, 19:49:51"
+    },
+    {
+      "id": 2701,
+      "sender": "Kumkum",
+      "text": "Sanchuu kesa hai",
+      "date": "13/09/2026, 19:57:33"
+    },
+    {
+      "id": 2761,
+      "sender": "Kumkum",
+      "text": "Gussa mat hona kisi ke pass nahi hai vo sticker",
+      "date": "13/09/2026, 20:05:05"
+    },
+    {
+      "id": 2821,
+      "sender": "Shaizan",
+      "text": "Mere yaha sab ki love marriage hoti he",
+      "date": "13/09/2026, 20:11:53"
+    },
+    {
+      "id": 2881,
+      "sender": "Shaizan",
+      "text": "Tho na mere ghar aa gaya tha",
+      "date": "13/09/2026, 20:21:18"
+    },
+    {
+      "id": 2941,
+      "sender": "Shaizan",
+      "text": "Are me bas ase hi bata raha",
+      "date": "13/09/2026, 20:29:43"
+    },
+    {
+      "id": 3001,
+      "sender": "Shaizan",
+      "text": "Kesa ?",
+      "date": "13/09/2026, 20:43:15"
+    },
+    {
+      "id": 3061,
+      "sender": "Shaizan",
+      "text": "Tuje meri ex nd all me itna interest kyu aa raha 🧐",
+      "date": "13/09/2026, 20:50:24"
+    },
+    {
+      "id": 3121,
+      "sender": "Shaizan",
+      "text": "Chota ge",
+      "date": "13/09/2026, 21:00:46"
+    },
+    {
+      "id": 3181,
+      "sender": "Shaizan",
+      "text": "Cousin byi ki bati",
+      "date": "13/09/2026, 21:10:45"
+    },
+    {
+      "id": 3241,
+      "sender": "Kumkum",
+      "text": "Aunty mujhe maregi phir",
+      "date": "13/09/2026, 21:19:12"
+    },
+    {
+      "id": 3301,
+      "sender": "Kumkum",
+      "text": "2 din baad exam hai or aapki acting khatam nahi ho rahi ...!! 🙏🏻",
+      "date": "14/09/2026, 13:49:10"
+    },
+    {
+      "id": 3361,
+      "sender": "Shaizan",
+      "text": "Baki kuch nahi hota he",
+      "date": "14/09/2026, 15:29:37"
+    },
+    {
+      "id": 3421,
+      "sender": "Shaizan",
+      "text": "Me kal phadunga nlm",
+      "date": "14/09/2026, 15:39:23"
+    },
+    {
+      "id": 3481,
+      "sender": "Kumkum",
+      "text": "Fir thank you",
+      "date": "14/09/2026, 17:22:01"
+    },
+    {
+      "id": 3541,
+      "sender": "Shaizan",
+      "text": "👺",
+      "date": "15/09/2026, 00:25:16"
+    },
+    {
+      "id": 3601,
+      "sender": "Shaizan",
+      "text": "Gussa tho nahi hogi",
+      "date": "15/09/2026, 00:51:05"
+    },
+    {
+      "id": 3661,
+      "sender": "Shaizan",
+      "text": "Kya chii",
+      "date": "15/09/2026, 00:57:14"
+    },
+    {
+      "id": 3721,
+      "sender": "Kumkum",
+      "text": "Tumhare ghar mein bas",
+      "date": "15/09/2026, 01:04:37"
+    },
+    {
+      "id": 3781,
+      "sender": "Kumkum",
+      "text": "Ye ladki ka naam kya hai?",
+      "date": "15/09/2026, 01:10:44"
+    },
+    {
+      "id": 3841,
+      "sender": "Kumkum",
+      "text": "Warna ladki log propose kyu karte",
+      "date": "15/09/2026, 01:18:44"
+    },
+    {
+      "id": 3901,
+      "sender": "Kumkum",
+      "text": "Hmhmhm allow kar di thi",
+      "date": "15/09/2026, 01:25:05"
+    },
+    {
+      "id": 3961,
+      "sender": "Shaizan",
+      "text": "I don't have any problem with any religion",
+      "date": "15/09/2026, 01:31:27"
+    },
+    {
+      "id": 4021,
+      "sender": "Shaizan",
+      "text": "Then came hawasi",
+      "date": "15/09/2026, 01:44:24"
+    },
+    {
+      "id": 4081,
+      "sender": "Kumkum",
+      "text": "Ha ?",
+      "date": "15/09/2026, 01:55:01"
+    },
+    {
+      "id": 4141,
+      "sender": "Kumkum",
+      "text": "Hmhm",
+      "date": "15/09/2026, 02:03:16"
+    },
+    {
+      "id": 4201,
+      "sender": "Shaizan",
+      "text": "Dhek",
+      "date": "15/09/2026, 02:10:34"
+    },
+    {
+      "id": 4261,
+      "sender": "Shaizan",
+      "text": "Late wala ki jaldi wala",
+      "date": "15/09/2026, 20:31:24"
+    },
+    {
+      "id": 4321,
+      "sender": "Shaizan",
+      "text": "Abb me gussa hu",
+      "date": "15/09/2026, 20:54:08"
+    },
+    {
+      "id": 4381,
+      "sender": "Kumkum",
+      "text": "20 maximum",
+      "date": "16/09/2026, 15:34:33"
+    },
+    {
+      "id": 4441,
+      "sender": "Shaizan",
+      "text": "Good 👍",
+      "date": "16/09/2026, 15:48:23"
+    },
+    {
+      "id": 4501,
+      "sender": "Kumkum",
+      "text": "Ha ha aacha tha shaizan ji ne bola hai na",
+      "date": "16/09/2026, 15:59:56"
+    },
+    {
+      "id": 4561,
+      "sender": "Shaizan",
+      "text": "Accha , asa kya 🤕",
+      "date": "16/09/2026, 16:16:03"
+    },
+    {
+      "id": 4621,
+      "sender": "Shaizan",
+      "text": "Hn na byi kya bolu",
+      "date": "16/09/2026, 16:37:30"
+    },
+    {
+      "id": 4681,
+      "sender": "Shaizan",
+      "text": "Hamari language ❗️❗️",
+      "date": "16/09/2026, 17:00:30"
+    },
+    {
+      "id": 4741,
+      "sender": "Shaizan",
+      "text": "Mushkil he but",
+      "date": "16/09/2026, 17:16:25"
+    }
+  ]
+}

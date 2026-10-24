@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>A Little Universe Called Us 🌷 Kumkum & Shaizan</title>
+  <meta name="description" content="An interactive 3D scroll-driven scrapbook love story for Kumkum." />
+
+  <!-- Google Fonts: Caveat & Indie Flower -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Indie+Flower&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- 3D WebGL Canvas -->
+  <canvas id="c"></canvas>
+
+  <!-- Native Scroll Spacer -->
+  <div id="s"></div>
+
+  <!-- Dynamic Fixed Top Caption -->
+  <div id="cap">"Hey, Kumkum. I made you a flower." 🌷</div>
+
+  <!-- Scroll / Swipe Hint (Issue 2 & 7) -->
+  <div id="scroll-hint" class="scroll-hint" aria-hidden="true">
+    <span class="hint-icon" aria-hidden="true">📜</span>
+    <span>Scroll to explore our story</span>
+  </div>
+
+  <!-- Top Corner Audio & Story Controls (Issues 12, 13, 14) -->
+  <header class="top-controls" role="toolbar" aria-label="Audio and Story controls">
+    <button id="music-btn" class="hud-btn-pill" aria-label="Toggle romantic music">🎵 Music: Off</button>
+    <button id="chat-vault-btn" class="hud-btn-pill" aria-label="Open our 37,523 messages time capsule">💬 37,523 Texts ✨</button>
+    <button id="story-btn" class="hud-btn-pill" aria-label="Read full uncut story">📖 Full Story</button>
+  </header>
+
+  <!-- Bottom Navigation HUD Pills (Issues 5, 6, 12) -->
+  <nav id="hud" aria-label="Chapter navigation" role="navigation"></nav>
+
+  <!-- Modal Close Button & Backdrop -->
+  <button id="x" aria-label="Close modal">Close ✕</button>
+  <div id="m" aria-hidden="true">
+    <div id="b"></div>
+  </div>
+
+  <!-- Fullscreen Lightbox for Real Photo Inspection -->
+  <div id="lightbox" aria-hidden="true">
+    <button id="close-lightbox" aria-label="Close image">✕</button>
+    <img id="lightbox-img" src="" alt="Full keepsake photo" />
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

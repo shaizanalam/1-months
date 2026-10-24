@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>A Little Universe Called Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#4a2c2a;--paper:#fbf4e4;--glass:rgba(255,248,235,.82);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#f3e3d0;--paper:#2a1f2e;--glass:rgba(30,22,40,.82)}}
+:root[data-theme="dark"]{--ink:#f3e3d0;--paper:#2a1f2e;--glass:rgba(30,22,40,.82)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:#f7e3dc;font-family:Caveat,cursive;color:var(--ink)}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+#s{height:1300vh;pointer-events:none}
+#cap{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(92vw,640px);text-align:center;font-size:clamp(22px,4.5vw,32px);line-height:1.2;background:var(--glass);padding:8px 16px;border-radius:14px;z-index:4;transition:opacity .5s;pointer-events:none}
+#hud{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:4px;background:var(--glass);padding:6px;border-radius:99px;z-index:5;max-width:96vw}
+#hud button{font:700 17px Caveat,cursive;color:var(--ink);background:none;border:0;border-radius:99px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+#hud button.on{background:#f06a9a;color:#fff}
+#hud button:focus-visible,#x:focus-visible,.bt button:focus-visible{outline:3px solid #f06a9a}
+@media(max-width:700px){#hud button span{display:none}}
+#m{position:fixed;inset:0;background:rgba(20,10,20,.62);display:none;align-items:center;justify-content:center;z-index:9;padding:16px}
+#b{background:var(--paper);color:var(--ink);width:min(92vw,620px);max-height:78vh;overflow:auto;padding:28px;border-radius:8px;font-size:clamp(22px,3.8vw,28px);line-height:1.35;white-space:pre-wrap;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+#b h3{margin:0 0 10px;font-size:1.2em;color:#d6457a}#b p{margin:0 0 .8em}
+#x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:14px;z-index:10;font:700 20px Caveat;border:0;border-radius:99px;padding:6px 16px;background:#f06a9a;color:#fff;cursor:pointer;display:none}
+.bt{display:flex;gap:10px;flex-wrap:wrap;transition:opacity 1s}.bt button{font:700 20px Caveat;border:2px solid #d6457a;background:none;color:var(--ink);border-radius:99px;padding:8px 16px;cursor:pointer}
+@media(prefers-reduced-motion:reduce){#cap,.bt{transition:none}}
+</style></head><body>
+<canvas id="c"></canvas><div id="s"></div><div id="cap"></div><div id="hud"></div>
+<button id="x" aria-label="Close">Close ✕</button><div id="m"><div id="b"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),TH=THREE;
+Promise.all([document.fonts.load('500 30px Caveat'),document.fonts.load('700 30px Caveat')]).catch(()=>{}).then(()=>{
+const R=new TH.WebGLRenderer({canvas:$('#c'),antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const S=new TH.Scene(),cam=new TH.PerspectiveCamera(58,1,.1,120);S.background=new TH.Color('#f7e3dc');S.fog=new TH.Fog('#f7e3dc',6,38);
+const rs=()=>{R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()};addEventListener('resize',rs);rs();
+const curve=new TH.CatmullRomCurve3([[0,0,14],[1,.5,-20],[-1,-.5,-55],[1.2,.5,-90],[-1.2,0,-125],[.6,.4,-160],[0,0,-190]].map(a=>new TH.Vector3(...a)));
+const at=z=>curve.getPointAt(Math.min(1,Math.max(0,(14-z)/204)));
+const mk=(w,h,f)=>{const c=document.createElement('canvas');c.width=w;c.height=h;f(c.getContext('2d'),w,h);const t=new TH.CanvasTexture(c);t.anisotropy=4;return t};
+const wrap=(x,t,mw)=>{const L=[];t.split('\n').forEach(p=>{let l='';p.split(' ').forEach(w=>{const n=l?l+' '+w:w;if(x.measureText(n).width>mw&&l){L.push(l);l=w}else l=n});L.push(l)});return L};
+const PAL={paper:['#fbf4e4','#4a2c2a'],kraft:['#c8a26b','#3b2512'],parch:['#ead6a9','#5a3b1f'],pink:['#ffd9e2','#6a2340'],night:['#1a2260','#fff6d8'],gold:['#fff0c2','#5a3b1f']};
+const note=(t,st='paper',title='')=>mk(512,352,(x,w,h)=>{const[b,i]=PAL[st];x.fillStyle=b;x.fillRect(0,0,w,h);for(let k=0;k<400;k++){x.fillStyle=`rgba(120,90,50,${Math.random()*.07})`;x.fillRect(Math.random()*w,Math.random()*h,2,2)}
+x.fillStyle=i;x.textBaseline='top';let y0=26;if(title){x.font='700 24px Caveat';x.fillText(title,26,16);y0=50}
+for(let s=34;s>=12;s--){x.font=`500 ${s}px Caveat`;const L=wrap(x,t,w-52);if(L.length*s*1.1<=h-y0-18||s==12){L.forEach((l,k)=>x.fillText(l,26,y0+k*s*1.1));break}}x.fillStyle='rgba(255,230,170,.6)';x.fillRect(w/2-40,-6,80,22)});
+const pickable=[],bobs=[],STORY=[];
+const pl=(tex,w,h,x,y,z)=>{const m=new TH.Mesh(new TH.PlaneGeometry(w,h),new TH.MeshBasicMaterial({map:tex,transparent:true,side:TH.DoubleSide}));m.position.set(x,y,z);S.add(m);return m};
+const add=(tex,z,side,{w=3.2,h=2.2,y=0,title='',text=''}={})=>{const p=at(z),m=pl(tex,w,h,p.x+side*2.6,p.y+y,z);m.rotation.y=-side*.35;m.userData={title,text,y0:m.position.y,ph:Math.random()*6};bobs.push(m);if(text)pickable.push(m);return m};
+const ch=t=>STORY.push('— '+t+' —');
+const n=(z,side,title,text,st,o={})=>{STORY.push((title?title+': ':'')+text);return add(note(text,st||'paper',title),z,side,{...o,title,text})};
+const str=(a,b,col)=>{const mid=a.position.clone().lerp(b.position,.5);mid.y-=.4;S.add(new TH.Mesh(new TH.TubeGeometry(new TH.CatmullRomCurve3([a.position,mid,b.position]),20,.02,5),new TH.MeshBasicMaterial({color:col})))};
+
+// procedural artwork
+const tulipTex=mk(640,480,(x,w,h)=>{x.fillStyle='#fbf3e6';x.fillRect(0,0,w,h);for(let k=0;k<900;k++){x.fillStyle=`rgba(150,120,90,${Math.random()*.07})`;x.fillRect(Math.random()*w,Math.random()*h,3,3)}
+[[130,.9],[260,1.1],[390,1],[520,.85]].forEach(([cx,s],i)=>{const by=440,ty=170+i%2*40,d=i%2?-1:1;x.strokeStyle='#3f7a3a';x.lineWidth=7;x.beginPath();x.moveTo(cx,by);x.quadraticCurveTo(cx+d*18,(by+ty)/2,cx,ty+40);x.stroke();x.fillStyle='#5aa352';x.beginPath();x.ellipse(cx+d*45,by-70,14,70*s,-d*.7,0,7);x.fill();
+x.fillStyle='#f06a9a';x.beginPath();x.moveTo(cx-38*s,ty);x.quadraticCurveTo(cx-44*s,ty+70,cx,ty+78);x.quadraticCurveTo(cx+44*s,ty+70,cx+38*s,ty);x.lineTo(cx+18*s,ty+22);x.lineTo(cx,ty-12);x.lineTo(cx-18*s,ty+22);x.closePath();x.fill();x.strokeStyle='#2a1a22';x.lineWidth=2;x.stroke()})});
+const t1=pl(tulipTex,4.6,3.45,0,0,4),t2=pl(tulipTex,5.6,4.2,0,0,2.6);t2.material.opacity=.4;
+const flork=mk(512,352,(x)=>{x.fillStyle='#fff4f6';x.fillRect(0,0,512,352);x.fillStyle='#f3c9a6';x.beginPath();x.arc(150,190,90,0,7);x.fill();x.fillStyle='rgba(255,90,130,.5)';[100,200].forEach(a=>{x.beginPath();x.arc(a,215,16,0,7);x.fill()});x.fillStyle='#222';[118,182].forEach(a=>{x.beginPath();x.arc(a,170,7,0,7);x.fill()});x.fillStyle='#f9a8c0';x.beginPath();x.arc(300,200,30,0,7);x.fill();x.strokeStyle='#d6457a';x.lineWidth=3;x.stroke();x.fillStyle='#4a2c2a';x.font='700 28px Caveat';x.fillText('Brain hai ye! →',270,120);x.fillText('Happy Birthday!',250,290)});
+const stamp=mk(400,160,x=>{x.translate(200,80);x.rotate(-.15);x.strokeStyle=x.fillStyle='#d12';x.lineWidth=8;x.strokeRect(-170,-55,340,110);x.font='700 30px Courier New,monospace';x.textAlign='center';x.fillText('STATUS: BLOCKED',0,10)});
+const ptex=mk(512,352,(x)=>{x.fillStyle='#fff';x.fillRect(0,0,512,352);[[[53,'I']],[[71,'Lu'],[23,'V']],[[39,'Y'],[8,'O'],[92,'U']],[[9,'F'],[8,'O'],[75,'Re'],[23,'V'],[68,'Er']]].forEach((r,i)=>r.forEach(([a,s],j)=>{const X=24+j*92,Y=14+i*80;x.fillStyle=['#ffd1dc','#d6e8ff','#e2f5d3','#fff0b8'][i];x.fillRect(X,Y,80,72);x.strokeStyle='#333';x.strokeRect(X,Y,80,72);x.fillStyle='#333';x.font='16px Caveat';x.fillText(a,X+6,Y+16);x.font='700 38px Caveat';x.fillText(s,X+24,Y+56)}));x.fillStyle='#d33';x.font='700 22px Caveat';x.fillText('I LuV YOU FO ReVEr ♥',150,344)});
+const ging=mk(128,128,x=>{x.fillStyle='#fff';x.fillRect(0,0,128,128);x.fillStyle='rgba(220,40,60,.55)';for(let i=0;i<128;i+=32){x.fillRect(i,0,16,128);x.fillRect(0,i,128,16)}});
+const NOTE='Happy Birthday! I still don’t know how to explain how unexpected it was to have you in my life, and somehow you becoming such an important part of my life was even more unexpected! I love the way you talk, the way you solve problems and also the way you shy... So yeah... happy birthday to someone (Shaizan) ♡ who became special to me without me even realising it. I’m really lucky to have you! ~ Kumkum';
+const ext=mk(512,352,(x)=>{x.fillStyle='#ffe3ea';x.fillRect(0,0,512,352);const L=(s,X,Y)=>[...s].forEach((c,i)=>{x.fillStyle=['#fff','#ffe08a','#9cd','#f9a'][i%4];x.fillRect(X+i*34,Y,32,40);x.fillStyle=['#c33','#333','#27a'][i%3];x.font='700 30px serif';x.fillText(c,X+6+i*34,Y+31)});L('HAPPY',44,26);L('BIRTH',280,26);L('Day',350,76);x.fillStyle='#fff';x.fillRect(176,150,160,90);x.fillStyle='#f48fb1';x.fillRect(176,150,160,36);x.fillStyle='#e91e63';x.font='34px serif';x.fillText('♥',242,148);x.fillStyle='#4a2c2a';x.font='700 30px Caveat';x.fillText('~ Cut the cake ~',168,290)});
+const inner=mk(512,352,(x,w,h)=>{x.drawImage(ging.image,0,0,512,352);x.fillStyle=x.createPattern(ging.image,'repeat');x.fillRect(0,0,w,h);x.fillStyle='#8a5a3a';x.fillRect(150,24,250,304);x.fillStyle='#fff7ea';x.fillRect(160,34,230,284);x.fillStyle='#4a2c2a';x.textBaseline='top';x.font='500 17px Caveat';wrap(x,NOTE,206).forEach((l,k)=>x.fillText(l,172,44+k*18));x.fillStyle='#fff';x.fillRect(24,210,100,110);x.fillStyle='#d6457a';x.font='700 18px Caveat';x.fillText('September',34,216);x.font='700 34px Caveat';x.fillText('♥29',44,260);x.font='30px serif';x.fillText('🐻',420,40);x.fillText('⭐',420,100);x.fillText('👻',30,40)});
+const env=mk(512,352,(x)=>{x.fillStyle='#f0dcb4';x.fillRect(0,0,512,352);x.strokeStyle='#b89560';x.lineWidth=3;x.beginPath();x.moveTo(0,0);x.lineTo(256,190);x.lineTo(512,0);x.stroke();x.fillStyle='#b3262e';x.beginPath();x.arc(256,190,36,0,7);x.fill();x.fillStyle='#f6c9c9';x.font='34px serif';x.textAlign='center';x.fillText('♥',256,203);x.fillStyle='#4a2c2a';x.font='700 38px Caveat';x.fillText('For Kumkum',256,300)});
+
+// ---- Scene 1
+ch('The Shift');
+n(-3,-1,'','It is funny how you can know someone, see them around, and think you have them figured out—until one random day, the universe shifts on its axis and hits you with a completely different reality. That is exactly what happened the day I truly saw you.','paper',{y:.5});
+n(-8,1,'','Suddenly, I wasn’t just looking at a familiar face; I was looking at this impossibly innocent, breathtakingly cute girl, and my heart didn’t stand a chance.','paper');
+n(-11,-1,'🌷 Tag A','Those long, dark eyelashes that seemed to hold a whole world of warmth beneath them','pink',{w:2.6,h:1.8,y:-.6});
+n(-14,1,'🌷 Tag B','Paired with the softest, cutest bunny-like cheeks that made me want to just stare at you forever','pink',{w:2.6,h:1.8,y:.6});
+// ---- Scene 2
+ch('Certified Menace');
+STORY.push('Brain hai ye!: I didn’t know what to get you because you already have a lot. So, I found the one thing that I know you didn’t have. Here you go -> Brain hai ye! Happy Birthday!');
+add(flork,-20,-1,{title:'Brain hai ye!',text:'I didn’t know what to get you because you already have a lot. So, I found the one thing that I know you didn’t have. Here you go -> Brain hai ye! Happy Birthday!'});
+n(-24,1,'Incident Report','The ironic part was that I was my own worst enemy at the beginning. On the outside, I was acting like a total menace—teasing you to an insane level, enough to make you think I was just some annoying weirdo.','paper');
+add(stamp,-27,-1,{w:2.2,h:.9,y:1.3});add(stamp,-31,1,{w:2.2,h:.9,y:-1.2});
+n(-35,-1,'Secret Note 1','You had no idea that behind all that relentless teasing, I was quietly admiring you from afar with an intensity that scared even me.','gold');
+n(-40,1,'Secret Note 2 🎀','When you weren’t looking, my eyes were always finding you. I noticed the tiniest details nobody else paid attention to—like the exact way you wore your hair clutcher, always clipped just slightly down at the back of your head, effortless and imperfect in the most mesmerizing way.','gold');
+n(-45,-1,'Secret Note 3','I memorized the placement of your moles, the subtle expressions that crossed your face, the quiet grace in the way you moved. I was falling harder and deeper with every passing day.','gold');
+// ---- Scene 3
+ch('Operation: Kingdom of Joy');
+n(-50,1,'','Because of my chaotic teasing, you had me blocked. I knew I couldn’t just barge in; I had to actually use my brain and play the long game.','paper');
+const f=n(-55,-1,'TOP SECRET','// OPERATION: KINGDOM OF JOY','kraft',{h:2.6});
+const k1=n(-60,1,'Node 01 · The Roadblock','Blocked. Direct approach impossible.','kraft');
+const k2=n(-65,-1,'Node 02 · The Bridge','Agent Zunaira — “I needed a bridge to reach your world, and that bridge was Zunaira.”','kraft');
+const k3=n(-70,1,'Node 03 · The Master Plan','Outing to Kingdom of Joy 🎟️ — “Through that connection, the door finally cracked open, and I got my chance to be in contact with you again.”','kraft');
+const k4=n(-75,-1,'Node 04 · The Promise','When I finally got that line of communication open, I made a promise to myself not to rush. I took every single step gradually, with patience and care.','gold');
+str(k1,k2,0xd12);str(k2,k3,0xd12);str(k3,k4,0xffc65a);
+// ---- Scene 4
+ch('The Late-Night Lore');
+n(-80,-1,'','Soon, my entire routine revolved around you. My nights were spent talking to you until the hours blurred together, and my days were spent replaying our conversations and daydreaming about the next time we would talk.','night');
+add(ptex,-87,1,{title:'I LuV YOU FO ReVEr',text:'I (53) · Lu (71) V (23) · Y (39) O (8) U (92) · F (9) O (8) Re (75) V (23) Er (68)'});STORY.push('Periodic card: I LuV YOU FO ReVEr');
+n(-93,-1,'','And then, the best part happened—I started catching subtle signals from your side too.','night',{w:2.6,h:1.8});
+STORY.push('Birthday card from Kumkum: '+NOTE);
+const gate=new TH.Group(),gp=at(-103);gate.position.set(gp.x,gp.y,-103);S.add(gate);
+const inn=pl(inner,3.2,2.2,0,0,-.02);S.remove(inn);gate.add(inn);inn.userData={title:'Kumkum’s note',text:NOTE};pickable.push(inn);
+const doors=[-1,1].map(s=>{const pv=new TH.Group();pv.position.x=s*1.6;gate.add(pv);const t=ext.clone();t.needsUpdate=true;t.repeat.set(.5,1);t.offset.set(s<0?0:.5,0);
+const m=new TH.Mesh(new TH.PlaneGeometry(1.6,2.2),new TH.MeshBasicMaterial({map:t}));m.position.x=-s*.8;m.userData={cake:1};pickable.push(m);pv.add(m);
+const bk=new TH.Mesh(new TH.PlaneGeometry(1.6,2.2),new TH.MeshBasicMaterial({map:ging}));bk.position.set(-s*.8,0,-.01);bk.rotation.y=Math.PI;pv.add(bk);return pv});
+// ---- Scene 5
+ch('Our Little World');
+const hers=n(-119,-1,'Her letter 🦋','You have somehow become such a beautiful part of my thoughts and my dreams... Sometimes I even dream about hugging you and holding you so tightly that I wouldn’t want to let go. And yes, maybe I’m a little obsessed with you. But I think it’s because I’m in love with you.','paper');
+const his=n(-123,1,'His reality','Nothing in this world compares to the feeling of meeting you in person. That height difference between us makes holding you feel like my arms were built specifically to be your safe space. And the way you hold onto me—refusing to let go, burying your face against me, sneaking closer just to breathe me in against my chest—it melts every bit of pride and toughness right out of me, leaving me completely yours.','gold',{h:2.6});
+str(hers,his,0xffc65a);
+const ca=n(-130,-1,'The First Kiss','Then came our first kiss. Neither of us really knew what we were doing; we were both completely new to it, a little clumsy, and just figuring it out together. Even so, the second our lips met, a wave of pure, dizzying happiness hit me so hard the whole world felt like it was spinning.','gold');
+const cb=n(-136,1,'Our Morning Sanctuary','Our morning walks became our favorite sanctuary—under the excuse of taking a walk, we would find quiet moments to hold each other close, lost in endless hugs and deeper kisses.','gold');
+const cc=n(-142,-1,'The Spark & No Rush','Every touch carries a spark that leaves me breathless... Whenever you lean in close, trace your fingers along my skin, or press close to my neck, my heart races like crazy. And honestly, there is no rush at all—we have our whole lives ahead of us to explore every chapter of being together.','gold');
+str(ca,cb,0xffc65a);str(cb,cc,0xffc65a);
+// ---- Scene 6
+ch('The Reason Underneath It All');
+n(-150,1,'From her letter','Sometimes I wonder if I’m even worthy of having someone like you because I can be boring, awkward, or unsure of myself...','parch');
+n(-158,-1,'From her letter','Please never take my feelings for granted or misuse the trust I’m giving you. I’m being completely honest and vulnerable with you... I just hope you’ll always be genuine with me and never make me regret being this honest about how I feel. ~ Kumkum','parch');
+pl(tulipTex,4.4,3.3,0,0,-186);
+const ev=pl(env,2,1.4,2.9,-1,-181);ev.userData={env:1};pickable.push(ev);bobs.push(ev);ev.userData.y0=-1;ev.userData.ph=1;
+const ring=new TH.Group();ring.position.z=-186;S.add(ring);const orbit=[];
+['The Shift','Certified Menace','Kingdom of Joy','Late-Night Lore','Our Sanctuary','Underneath It All'].forEach((t,i)=>{const a=i/6*6.283,m=pl(note(t,'gold'),1.5,1,Math.cos(a)*4.4,Math.sin(a)*1.6,Math.sin(a)*0+Math.sin(a*2)*.6);ring.add(m);orbit.push(m)});
+const LET=['You know what’s funny, Kumkum?','I started all this because I noticed your eyelashes and bunny cheeks and thought you were the prettiest girl ever. And somehow, the more I got to know you, the more I realized that wasn’t even the best part about you.','In your letters, you wondered if you were worthy of me, and asked me to protect your trust. Never once question your worth. Deep down I always had a specific type—and somehow, effortlessly, you fit every single piece of it. You became the absolute definition of perfection in my eyes, and your trust is the safest thing in my hands.','Above everything else—beyond how stunning you are, beyond the butterflies and the dizziness of our kisses—what makes me love you the most is the heart you put into us. The amount of effort, patience, and genuine love you pour into our relationship makes you the absolute best girlfriend in the entire universe.','From that day I first noticed your eyelashes and bunny cheeks, to plotting my way through Kingdom of Joy, to holding you against my chest on early morning walks, every second with you feels like a dream I never want to wake up from.','Forever yours,\n~ Shaizan'];
+STORY.push('The final letter:\n'+LET.join('\n\n'));
+// particles
+const pts=(N,f,col,sz)=>{const g=new TH.BufferGeometry(),a=new Float32Array(N*3);for(let i=0;i<N;i++)f(a,i*3);g.setAttribute('position',new TH.BufferAttribute(a,3));const m=new TH.PointsMaterial({color:col,size:sz,transparent:true,depthWrite:false});S.add(new TH.Points(g,m));return m};
+pts(700,(a,i)=>{a[i]=(Math.random()-.5)*16;a[i+1]=(Math.random()-.5)*9;a[i+2]=20-Math.random()*215},0xffc65a,.09);
+const starM=pts(450,(a,i)=>{const r=4+Math.random()*7,t=Math.random()*6.28;a[i]=Math.cos(t)*r;a[i+1]=Math.sin(t)*r;a[i+2]=-60-Math.random()*60},0xffffff,.12);
+// UI
+const M=$('#m'),B=$('#b'),X=$('#x'),cap=$('#cap'),hud=$('#hud');
+const show=()=>{M.style.display='flex';X.style.display='block'},hide=()=>{M.style.display='none';X.style.display='none'};
+X.onclick=hide;M.onclick=e=>{if(e.target==M)hide()};addEventListener('keydown',e=>{if(e.key=='Escape')hide()});
+const openM=(t,x)=>{B.innerHTML='';const h=document.createElement('h3'),p=document.createElement('div');h.textContent=t;p.textContent=x;B.append(h,p);show()};
+const openLetter=()=>{B.innerHTML='';LET.forEach((l,i)=>{const p=document.createElement('p');p.textContent=l;p.style.cssText='opacity:0;transition:opacity 1.2s';B.append(p);setTimeout(()=>p.style.opacity=1,300+i*1300)});
+const d=document.createElement('div');d.className='bt';d.style.opacity=0;[['Read Our Full Uncut Story 📖',()=>openM('Our Full Story',STORY.join('\n\n'))],['Fly Through Our Universe Again 🌷',()=>{hide();scrollTo({top:0,behavior:'smooth'})}]].forEach(([t,f])=>{const b=document.createElement('button');b.textContent=t;b.onclick=f;d.append(b)});B.append(d);setTimeout(()=>d.style.opacity=1,300+LET.length*1300);show()};
+const BR=[0,.15,.32,.48,.68,.85],NM=['The Shift','Certified Menace','Kingdom of Joy','Late-Night Lore','Our Sanctuary','Underneath It All'];
+const CAP=['Hey, Kumkum. I made you a flower. (Yes, I know. Professional artist. Please don’t be jealous.)','Certified menace vs. the secret truth','Operation: Kingdom of Joy','The late-night lore','Our little world: where your dreams meet my reality','The reason underneath it all'];
+NM.forEach((t,i)=>{const b=document.createElement('button');b.innerHTML=`${i+1}<span> ${t}</span>`;b.title=t;b.onclick=()=>scrollTo({top:BR[i]*(document.documentElement.scrollHeight-innerHeight)+1,behavior:'smooth'});hud.append(b)});
+let gOpen=false,si=-1,open=0,sp=0;
+const rc=new TH.Raycaster(),mv=new TH.Vector2();
+$('#c').addEventListener('click',e=>{mv.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);rc.setFromCamera(mv,cam);const h=rc.intersectObjects(pickable,false)[0];if(!h)return;const u=h.object.userData;if(u.cake)gOpen=true;else if(u.env)openLetter();else openM(u.title,u.text)});
+const stops=[[0,'#f7e3dc'],[.2,'#fde9c8'],[.4,'#d8bd92'],[.56,'#10163f'],[.72,'#ffd7a0'],[.9,'#f4e6d3']].map(([p,c])=>[p,new TH.Color(c)]);
+const bg=p=>{for(let i=1;i<stops.length;i++)if(p<=stops[i][0]||i==stops.length-1){const a=stops[i-1],b=stops[i];return a[1].clone().lerp(b[1],Math.min(1,Math.max(0,(p-a[0])/(b[0]-a[0]))))}};
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),tv=new TH.Vector3();
+function loop(ms){requestAnimationFrame(loop);const mx=document.documentElement.scrollHeight-innerHeight,p=mx>0?scrollY/mx:0;
+sp+=(p-sp)*(sp>.68&&sp<.85?.035:.06);const tt=sp*.93;
+cam.position.copy(curve.getPointAt(tt));cam.lookAt(curve.getPointAt(tt+.05));cam.rotateZ(Math.sin(Math.PI*cl((sp-.02)/.12))*.26);
+const c=bg(sp);S.background.copy(c);S.fog.color.copy(c);starM.opacity=cl(1-Math.abs(sp-.58)/.15);
+let s=0;BR.forEach((b,i)=>{if(sp>=b)s=i});if(s!=si){si=s;cap.style.opacity=0;setTimeout(()=>{cap.textContent=CAP[si];cap.style.opacity=1},si?250:0);[...hud.children].forEach((b,i)=>b.classList.toggle('on',i==si))}
+open+=((gOpen||cam.position.z<-87?1:0)-open)*.05;doors[0].rotation.y=-open*2.09;doors[1].rotation.y=open*2.09;
+bobs.forEach(m=>{m.position.y=m.userData.y0+Math.sin(ms*.0012+m.userData.ph)*.08});
+t1.material.opacity=cl((cam.position.z-3)/6+1);ring.rotation.y=ms*.0003;orbit.forEach(m=>m.lookAt(cam.position));
+R.render(S,cam)}
+loop(0);});
+</script></body></html>

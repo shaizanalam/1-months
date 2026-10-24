@@ -1,0 +1,412 @@
+{
+  "stats": {
+    "total": 37523,
+    "shaizan": 10944,
+    "kumkum": 10617,
+    "days": 49,
+    "startDate": "Sep 6, 2026",
+    "endDate": "Oct 24, 2026",
+    "avgPerDay": 765,
+    "peakHours": [
+      {
+        "hour": "11:00 PM",
+        "count": 2750
+      },
+      {
+        "hour": "04:00 PM",
+        "count": 2495
+      },
+      {
+        "hour": "10:00 PM",
+        "count": 2312
+      },
+      {
+        "hour": "12:00 AM",
+        "count": 2085
+      },
+      {
+        "hour": "01:00 AM",
+        "count": 1806
+      }
+    ]
+  },
+  "milestones": [
+    {
+      "id": "first-dm",
+      "title": "The Very First DM & The Apology 🕊️",
+      "date": "Sep 6, 2026 · 9:05 PM",
+      "scene": "Scene 02: Certified Menace",
+      "messages": [
+        {
+          "sender": "Shaizan",
+          "text": "Yoo 🤟 Just taking you consent before add you to grp ! May I ?!"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Yup 👍"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Btw sry for that day , ik i should've done trash talk 🙏 I tried but ... Just sorry"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "It's okay mein to bhul bhi gayi ..!! 🙂"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Nha you were right... Chill mar and bas maf kar dio 🙏 (❤️)"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Vese tu utna bhi Ganda nahi hai jitna hum log sochte the tere bare mein 🤣🤣 Aab opinion change karna padega"
+        }
+      ]
+    },
+    {
+      "id": "kingdom-joy",
+      "title": "Operation: Kingdom of Joy 🎟️",
+      "date": "Oct 7, 2026",
+      "scene": "Scene 03: Kingdom of Joy",
+      "messages": [
+        {
+          "sender": "Kumkum",
+          "text": "Mein us din kingdom of joy ke bare mein bol rahi thi..!! DPS ke pass mein hai"
+        },
+        {
+          "sender": "Coaching Notice",
+          "text": "📢 Annual Fun Trip to Kingdom of Joy: Trampoline Park, Go-Karting, Bowling, Horror House"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Zunaira ko bol ke planning start karte hain! Everything set!"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Haha okay done! Can't wait for this ✨"
+        }
+      ]
+    },
+    {
+      "id": "cheeks-lore",
+      "title": "The Bunny Cheeks & Compliments 🐰",
+      "date": "Late September",
+      "scene": "Scene 01: The Shift",
+      "messages": [
+        {
+          "sender": "Kumkum",
+          "text": "Tuje meri side cheeks me itna intrest kyu he ghum phir ke wahi aa jaati he 🙈"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Okay so what i like most about you is your bunny cheeks 🤌🫶 and those eyelashes hold a whole world."
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Achaaaa aisa kya? Haha you're impossible 🥹"
+        }
+      ]
+    },
+    {
+      "id": "late-night",
+      "title": "The Late-Night 2 AM Lore 🌙",
+      "date": "Midnight Hours",
+      "scene": "Scene 04: Late-Night Lore",
+      "messages": [
+        {
+          "sender": "Shaizan",
+          "text": "My nights are spent talking to you until hours blur together."
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Same here... I don't even realize when it becomes 2 AM with you 🫠"
+        },
+        {
+          "sender": "Shaizan",
+          "text": "Actually i over all love you 🤭💖"
+        },
+        {
+          "sender": "Kumkum",
+          "text": "Vese love you too 🫠"
+        }
+      ]
+    }
+  ],
+  "randomSnippets": [
+    {
+      "date": "06/09/2026, 21:05:46",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Yup"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Btw sry for that day , ik i should've done trash talk 🙏"
+      }
+    },
+    {
+      "date": "12/09/2026, 22:25:40",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Ohh kar kar sry to disturb"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Are nahi abhi idea soch raha"
+      }
+    },
+    {
+      "date": "13/09/2026, 20:05:59",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Kumkumon ka level up evolution nahi hoga"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Tu Ganda bachha hai par"
+      }
+    },
+    {
+      "date": "16/09/2026, 23:02:40",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Sry na bhyii"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Actually my past version is bad , may be still i am bad for other,  tere se baat kar lia is lie accha lag raha hu , what if nahi karta"
+      }
+    },
+    {
+      "date": "19/09/2026, 16:23:56",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "I don't want to be called playboy , commarce me hi sanchita , wahi pe wo , log at the end bolnge play boy he"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "1 2 saal hi to chotte hai tere se pedophile"
+      }
+    },
+    {
+      "date": "22/09/2026, 14:35:36",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Me kon sa unka chamca hu"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Fir bhi naa itni jaldi kese trust karu sry 😔"
+      }
+    },
+    {
+      "date": "24/09/2026, 02:50:15",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Baat hi asi karti he"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Sryyy"
+      }
+    },
+    {
+      "date": "25/09/2026, 01:38:05",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "I don't trust him par phir mujhe laga ki"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Man lo"
+      }
+    },
+    {
+      "date": "26/09/2026, 01:29:07",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Khair 🥀"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Haa khair"
+      }
+    },
+    {
+      "date": "27/09/2026, 00:00:26",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Never mind sorry"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Na never"
+      }
+    },
+    {
+      "date": "29/09/2026, 12:54:29",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Sryy"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Thik"
+      }
+    },
+    {
+      "date": "01/10/2026, 00:58:59",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Love language"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Chill"
+      }
+    },
+    {
+      "date": "02/10/2026, 18:22:05",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Ha kaha ?"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Jaha hug kar sake"
+      }
+    },
+    {
+      "date": "04/10/2026, 00:29:45",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Sach sach bata do"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Mujhe kisi ke upar trust nahi haii"
+      }
+    },
+    {
+      "date": "05/10/2026, 21:24:59",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Nahh  mein to bar bar dhek rahi cute lag rahe the"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Okayy baba , abb nahi karunga , side ake bhat jyu ga bas 😭"
+      }
+    },
+    {
+      "date": "07/10/2026, 00:41:33",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Hehehe 🤣"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Accha or kya karte cheeks pakad ke"
+      }
+    },
+    {
+      "date": "08/10/2026, 00:21:55",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "I love you shaizan   sachhi mujhe naa hug karne ka Maan kar raha hai"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Abb kese karo ge"
+      }
+    },
+    {
+      "date": "09/10/2026, 00:30:59",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Sorry na"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "So Jake"
+      }
+    },
+    {
+      "date": "10/10/2026, 01:28:37",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Sorry sacchi wala"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Mere  bf ho aap itna tho Banta hai vese 🥲"
+      }
+    },
+    {
+      "date": "11/10/2026, 00:07:06",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Hug nahi"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Thoo"
+      }
+    },
+    {
+      "date": "12/10/2026, 21:02:02",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Nd asked do patrolling happen on early morning so he said not so"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "accha ye kyu puche or"
+      }
+    },
+    {
+      "date": "14/10/2026, 06:35:40",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Shadi ke baad aap bore tho nahi hoge naa kyuki mein tho shadi ke baad isse jyada aache se hug and kiss karungi"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Sacchiiii"
+      }
+    },
+    {
+      "date": "16/10/2026, 16:56:19",
+      "m1": {
+        "sender": "Shaizan",
+        "text": "Okay"
+      },
+      "m2": {
+        "sender": "Kumkum",
+        "text": "Yrrr mein abhi se miss kar rahi huu"
+      }
+    },
+    {
+      "date": "19/10/2026, 17:38:40",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Yrr mera net"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Sorry abb se nahi ksrunga asi baat"
+      }
+    },
+    {
+      "date": "20/10/2026, 23:52:05",
+      "m1": {
+        "sender": "Kumkum",
+        "text": "Byee"
+      },
+      "m2": {
+        "sender": "Shaizan",
+        "text": "Love you so much"
+      }
+    }
+  ]
+}
