@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import confetti from 'canvas-confetti';
+import { animate, spring, stagger } from 'motion';
 import { romanticAudio } from './audio.js';
 import { UNCUT_STORY, CARDS_DATA } from './storyData.js';
 import chatData from './chat-data.json';
@@ -31,6 +32,36 @@ function initApp() {
 
   const allCards = [];
   const allStrings = [];
+  const allClouds = [];
+
+  // Smooth mouse / touch parallax tracking for 3D clouds
+  let targetMouseX = 0;
+  let targetMouseY = 0;
+  let smoothMouseX = 0;
+  let smoothMouseY = 0;
+  window.addEventListener('pointermove', (e) => {
+    targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+  }, { passive: true });
+
+  // Registration helper for fluid organic physical billowing clouds
+  function registerCloud(mesh, options = {}) {
+    mesh.userData.isCloud = true;
+    mesh.userData.x0 = mesh.position.x;
+    mesh.userData.y0 = mesh.position.y;
+    mesh.userData.z0 = mesh.position.z;
+    mesh.userData.scaleX0 = mesh.scale.x; // preserves -1 flip if mirrored
+    mesh.userData.scaleY0 = mesh.scale.y;
+    mesh.userData.driftAmpX = options.driftAmpX !== undefined ? options.driftAmpX : 0.26;
+    mesh.userData.driftAmpY = options.driftAmpY !== undefined ? options.driftAmpY : 0.18;
+    mesh.userData.rotAmp = options.rotAmp !== undefined ? options.rotAmp : 0.032;
+    mesh.userData.breathAmp = options.breathAmp !== undefined ? options.breathAmp : 0.036;
+    mesh.userData.speed = options.speed !== undefined ? options.speed : (0.0009 + Math.random() * 0.0005);
+    mesh.userData.cloudPh = options.ph !== undefined ? options.ph : (mesh.position.z * 0.18 + mesh.position.x * 0.25);
+    allClouds.push(mesh);
+    return mesh;
+  }
+
   let gate = null;
   let ev = null;
   let tEnd = null;
@@ -455,20 +486,17 @@ function initApp() {
 
   // Layered 3D Painted Cream Cloud Banks framing the opening scene (using user's uploaded cream cloud)
   cloudIntroLeft = pl(realTextures.morningClouds, 9.2, 6.5, -4.6, -1.8, 3.7);
-  cloudIntroLeft.userData = { y0: -1.8, ph: 0.2 };
   cloudIntroLeft.material.fog = false;
-  bobs.push(cloudIntroLeft);
+  registerCloud(cloudIntroLeft, { driftAmpX: 0.28, driftAmpY: 0.20, rotAmp: 0.03, breathAmp: 0.038, ph: 0.2 });
 
   cloudIntroRight = pl(realTextures.morningClouds, 9.6, 6.8, 4.6, -1.8, 3.7);
   cloudIntroRight.scale.x = -1;
-  cloudIntroRight.userData = { y0: -1.8, ph: 2.2 };
   cloudIntroRight.material.fog = false;
-  bobs.push(cloudIntroRight);
+  registerCloud(cloudIntroRight, { driftAmpX: 0.28, driftAmpY: 0.20, rotAmp: 0.03, breathAmp: 0.038, ph: 2.2 });
 
   cloudIntroCenter = pl(realTextures.morningClouds, 13.5, 9.6, 0, -2.6, 3.2);
-  cloudIntroCenter.userData = { y0: -2.6, ph: 1.1 };
   cloudIntroCenter.material.fog = false;
-  bobs.push(cloudIntroCenter);
+  registerCloud(cloudIntroCenter, { driftAmpX: 0.35, driftAmpY: 0.24, rotAmp: 0.024, breathAmp: 0.045, ph: 1.1 });
 
   // Hero Watercolor Tulip Presentation Group (Deckle frame mount, gold foil, washi tapes, calligraphy plaque)
   tulipHeroGroup = new TH.Group();
@@ -539,30 +567,25 @@ function initApp() {
   // Layered 3D Blue Cloud Banks (Replacing odd arch with dreamy cloud banks)
   const blueBank1 = pl(realTextures.blueCloudsPanoramic, 17.5, 9.8, 0, -2.4, -28);
   blueBank1.material.fog = false;
-  blueBank1.userData = { y0: -2.4, ph: 0.6 };
-  bobs.push(blueBank1);
+  registerCloud(blueBank1, { driftAmpX: 0.36, driftAmpY: 0.22, rotAmp: 0.026, breathAmp: 0.04, ph: 0.6 });
 
   const bluePuff1 = pl(realTextures.blueCloudWatercolor, 6.2, 6.2, -5.2, 1.6, -22);
   bluePuff1.material.fog = false;
-  bluePuff1.userData = { y0: 1.6, ph: 1.8 };
-  bobs.push(bluePuff1);
+  registerCloud(bluePuff1, { driftAmpX: 0.30, driftAmpY: 0.25, rotAmp: 0.045, breathAmp: 0.048, ph: 1.8 });
 
   const bluePuff2 = pl(realTextures.blueCloudWatercolor, 6.4, 6.4, 5.0, 1.8, -34);
   bluePuff2.scale.x = -1;
   bluePuff2.material.fog = false;
-  bluePuff2.userData = { y0: 1.8, ph: 2.9 };
-  bobs.push(bluePuff2);
+  registerCloud(bluePuff2, { driftAmpX: 0.30, driftAmpY: 0.25, rotAmp: 0.045, breathAmp: 0.048, ph: 2.9 });
 
   const blueBank2 = pl(realTextures.blueCloudsPanoramic, 18.0, 10.2, 0, -2.2, -66);
   blueBank2.scale.x = -1;
   blueBank2.material.fog = false;
-  blueBank2.userData = { y0: -2.2, ph: 1.4 };
-  bobs.push(blueBank2);
+  registerCloud(blueBank2, { driftAmpX: 0.38, driftAmpY: 0.24, rotAmp: 0.025, breathAmp: 0.042, ph: 1.4 });
 
   const bluePuff3 = pl(realTextures.blueCloudWatercolor, 5.8, 5.8, -4.8, 1.2, -60);
   bluePuff3.material.fog = false;
-  bluePuff3.userData = { y0: 1.2, ph: 0.2 };
-  bobs.push(bluePuff3);
+  registerCloud(bluePuff3, { driftAmpX: 0.28, driftAmpY: 0.22, rotAmp: 0.04, breathAmp: 0.045, ph: 0.2 });
 
   // Golden stardust particles in the sapphire nebula
   pts(160, (a, i) => {
@@ -784,31 +807,26 @@ function initApp() {
   // Midground drifting lavender cloud puffs as you approach the climax
   const cloudApproach1 = pl(realTextures.lavenderClouds, 9.5, 4.9, -4.5, -1.2, -165);
   cloudApproach1.material.opacity = 0.88;
-  cloudApproach1.userData = { y0: -1.2, ph: 1.8 };
-  bobs.push(cloudApproach1);
+  registerCloud(cloudApproach1, { driftAmpX: 0.30, driftAmpY: 0.22, rotAmp: 0.035, breathAmp: 0.04, ph: 1.8 });
 
   const cloudApproach2 = pl(realTextures.lavenderClouds, 9.5, 4.9, 4.5, -1.4, -174);
   cloudApproach2.scale.x = -1;
   cloudApproach2.material.opacity = 0.88;
-  cloudApproach2.userData = { y0: -1.4, ph: 3.2 };
-  bobs.push(cloudApproach2);
+  registerCloud(cloudApproach2, { driftAmpX: 0.30, driftAmpY: 0.22, rotAmp: 0.035, breathAmp: 0.04, ph: 3.2 });
 
   // Layered 3D Billowy Pastel Pink & Lavender Cloud Banks cradling the letter
   cloudLeft = pl(realTextures.lavenderClouds, 13.0, 6.7, -5.6, -1.8, -183.5);
-  cloudLeft.userData = { y0: -1.8, ph: 0 };
   cloudLeft.material.fog = false;
-  bobs.push(cloudLeft);
+  registerCloud(cloudLeft, { driftAmpX: 0.34, driftAmpY: 0.22, rotAmp: 0.03, breathAmp: 0.042, ph: 0.0 });
 
   cloudRight = pl(realTextures.lavenderClouds, 13.0, 6.7, 5.6, -1.8, -183.5);
   cloudRight.scale.x = -1;
-  cloudRight.userData = { y0: -1.8, ph: 2.5 };
   cloudRight.material.fog = false;
-  bobs.push(cloudRight);
+  registerCloud(cloudRight, { driftAmpX: 0.34, driftAmpY: 0.22, rotAmp: 0.03, breathAmp: 0.042, ph: 2.5 });
 
   cloudCenter = pl(realTextures.lavenderClouds, 17.5, 9.0, 0, -2.6, -184.2);
-  cloudCenter.userData = { y0: -2.6, ph: 1.2 };
   cloudCenter.material.fog = false;
-  bobs.push(cloudCenter);
+  registerCloud(cloudCenter, { driftAmpX: 0.42, driftAmpY: 0.28, rotAmp: 0.024, breathAmp: 0.05, ph: 1.2 });
 
   // Delicate Shimmering Rose-Gold & Lavender Finale Stardust
   pts(350, (a, i) => {
@@ -877,16 +895,38 @@ function initApp() {
   const lightboxImg = $('#lightbox-img');
   const closeLightbox = $('#close-lightbox');
 
+  let isModalAnimating = false;
   const show = () => {
     M.style.display = 'flex';
     X.style.display = 'block';
+    isModalAnimating = true;
+
+    animate(M, { opacity: [0, 1] }, { duration: 0.25, ease: 'easeOut' });
+    animate(
+      B,
+      { opacity: [0, 1], scale: [0.90, 1], y: [22, 0] },
+      { type: spring, damping: 26, stiffness: 350 }
+    ).then(() => {
+      isModalAnimating = false;
+    });
+
+    animate(X, { opacity: [0, 1], scale: [0.75, 1] }, { type: spring, damping: 22, stiffness: 400 });
   };
+
   const hide = () => {
+    if (isModalAnimating) return;
     const v = B.querySelector('video');
     if (v) v.pause();
     romanticAudio.unduck();
-    M.style.display = 'none';
-    X.style.display = 'none';
+
+    isModalAnimating = true;
+    animate(B, { opacity: [1, 0], scale: [1, 0.94], y: [0, 16] }, { duration: 0.2, ease: 'easeInOut' });
+    animate(X, { opacity: [1, 0] }, { duration: 0.15 });
+    animate(M, { opacity: [1, 0] }, { duration: 0.22, ease: 'easeInOut' }).then(() => {
+      M.style.display = 'none';
+      X.style.display = 'none';
+      isModalAnimating = false;
+    });
   };
 
   X.onclick = hide;
@@ -1034,12 +1074,11 @@ function initApp() {
     header.textContent = 'Shaizan’s Letter For Kumkum ♡';
     B.appendChild(header);
 
-    LET.forEach((l, i) => {
+    LET.forEach((l) => {
       const p = document.createElement('p');
       p.textContent = l;
-      p.style.cssText = 'opacity:0;transition:opacity 1.2s';
+      p.style.opacity = '0';
       B.appendChild(p);
-      setTimeout(() => { p.style.opacity = '1'; }, 200 + i * 1000);
     });
 
     const d = document.createElement('div');
@@ -1062,8 +1101,21 @@ function initApp() {
     });
 
     B.appendChild(d);
-    setTimeout(() => { d.style.opacity = '1'; }, 300 + LET.length * 1100);
     show();
+
+    // Framer Motion emotional letter reveal with staggered paragraphs
+    const paragraphs = B.querySelectorAll('p');
+    animate(
+      paragraphs,
+      { opacity: [0, 1], y: [14, 0] },
+      { delay: stagger(0.7, { startDelay: 0.2 }), duration: 0.9, ease: [0.22, 1, 0.36, 1] }
+    );
+
+    animate(
+      d,
+      { opacity: [0, 1], y: [16, 0] },
+      { delay: 0.3 + LET.length * 0.72, type: spring, damping: 24, stiffness: 320 }
+    );
   };
 
   // Chapter Breeds
@@ -1270,16 +1322,15 @@ function initApp() {
     S.fog.color.copy(c);
     starM.opacity = cl(1 - Math.abs(sp - 0.66) / 0.16);
 
-    // Update Caption & HUD Pill
+    // Update Caption & HUD Pill with Framer Motion spring transition
     let s = 0;
     BR.forEach((b, i) => { if (sp >= b) s = i; });
     if (s !== si) {
       si = s;
-      cap.style.opacity = '0';
-      setTimeout(() => {
+      animate(cap, { opacity: [1, 0], y: [0, -6] }, { duration: 0.16 }).then(() => {
         cap.textContent = CAP[si];
-        cap.style.opacity = '1';
-      }, si ? 250 : 0);
+        animate(cap, { opacity: [0, 1], y: [6, 0] }, { type: spring, damping: 25, stiffness: 320 });
+      });
       [...hud.children].forEach((b, i) => b.classList.toggle('on', i === si));
     }
 
@@ -1293,9 +1344,40 @@ function initApp() {
     doors[0].rotation.y = -open * 2.09;
     doors[1].rotation.y = open * 2.09;
 
-    // Gentle Bobbing Animation for all Keepsakes
+    // Gentle Bobbing Animation for all Keepsake Cards
     bobs.forEach((m) => {
       m.position.y = m.userData.y0 + Math.sin(ms * 0.0012 + m.userData.ph) * 0.08;
+    });
+
+    // Smooth Mouse / Pointer Parallax for 3D Atmosphere
+    smoothMouseX += (targetMouseX - smoothMouseX) * 0.05;
+    smoothMouseY += (targetMouseY - smoothMouseY) * 0.05;
+
+    // Fluid Physical Organic Cloud Billowing, Volumetric Breathing, and Depth Parallax
+    allClouds.forEach((c) => {
+      const u = c.userData;
+      const ph = u.cloudPh;
+      const spd = u.speed;
+
+      // Compound harmonic waves create realistic, undulating physical billowing
+      const wave1 = Math.sin(ms * spd + ph);
+      const wave2 = Math.cos(ms * spd * 0.65 + ph * 1.3);
+      const wave3 = Math.sin(ms * spd * 1.35 + ph * 0.7);
+
+      const billowY = wave1 * u.driftAmpY + wave2 * (u.driftAmpY * 0.35);
+      const billowX = wave2 * u.driftAmpX + wave3 * (u.driftAmpX * 0.25);
+      const billowRot = Math.sin(ms * spd * 0.8 + ph) * u.rotAmp;
+      const breath = 1.0 + wave1 * u.breathAmp + wave3 * (u.breathAmp * 0.28);
+
+      // Distance-weighted depth parallax relative to camera position
+      const distToCam = Math.max(1, Math.abs(c.position.z - cam.position.z));
+      const parallaxFactor = Math.min(0.55, 3.2 / distToCam);
+
+      c.position.x = u.x0 + billowX + smoothMouseX * parallaxFactor;
+      c.position.y = u.y0 + billowY + smoothMouseY * parallaxFactor;
+      c.rotation.z = billowRot;
+      c.scale.x = u.scaleX0 * breath;
+      c.scale.y = u.scaleY0 * breath;
     });
 
     // Tulip transparency
@@ -1304,7 +1386,28 @@ function initApp() {
     R.render(S, cam);
   }
 
-  // Initial responsive layout calculation
+  // Tactile Framer Motion spring micro-interactions for UI buttons
+  const initTactileButtons = () => {
+    document.querySelectorAll('.hud-btn-pill, #hud button, #x, .bt button').forEach((btn) => {
+      if (btn.dataset.hasMotion) return;
+      btn.dataset.hasMotion = '1';
+      btn.addEventListener('mouseenter', () => {
+        animate(btn, { scale: 1.05, y: -2 }, { type: spring, damping: 18, stiffness: 420 });
+      });
+      btn.addEventListener('mouseleave', () => {
+        animate(btn, { scale: 1.0, y: 0 }, { type: spring, damping: 24, stiffness: 380 });
+      });
+      btn.addEventListener('pointerdown', () => {
+        animate(btn, { scale: 0.93 }, { type: spring, damping: 16, stiffness: 500 });
+      });
+      btn.addEventListener('pointerup', () => {
+        animate(btn, { scale: 1.03 }, { type: spring, damping: 20, stiffness: 440 });
+      });
+    });
+  };
+
+  // Initial responsive layout calculation & tactile button initialization
   resize();
+  initTactileButtons();
   loop(0);
 }

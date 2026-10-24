@@ -1,5 +1,6 @@
 import museumData from './memory-museum-data.json';
 import confetti from 'canvas-confetti';
+import { animate, spring, stagger } from 'motion';
 
 export function createMemoryMuseum(containerEl, onClose) {
   // Local storage for user review/approvals
@@ -549,6 +550,15 @@ export function createMemoryMuseum(containerEl, onClose) {
 
       viewContainer.appendChild(searchEl);
     }
+
+    // Framer Motion spring entrance for newly rendered module & cards
+    try {
+      animate(viewContainer, { opacity: [0, 1], y: [14, 0] }, { duration: 0.28, ease: 'easeOut' });
+      const cards = viewContainer.querySelectorAll('.wrapped-stat-card, .secret-dict-card, .timeline-card, .detective-item, .tradition-card, .letter-card, .universe-cluster, .quote-card, .memory-jar-note');
+      if (cards.length > 0) {
+        animate(cards, { opacity: [0, 1], y: [16, 0], scale: [0.96, 1] }, { delay: stagger(0.035), type: spring, damping: 26, stiffness: 340 });
+      }
+    } catch (e) {}
   };
 
   renderNav();

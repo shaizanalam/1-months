@@ -12,6 +12,7 @@
     "canvas-confetti": "^1.9.4",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
+    "motion": "^14.6.0",
     "three": "^0.170.0"
   },
   "devDependencies": {
