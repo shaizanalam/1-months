@@ -554,9 +554,9 @@ export function createMemoryMuseum(containerEl, onClose) {
     // Framer Motion spring entrance for newly rendered module & cards
     try {
       animate(viewContainer, { opacity: [0, 1], y: [14, 0] }, { duration: 0.28, ease: 'easeOut' });
-      const cards = viewContainer.querySelectorAll('.wrapped-stat-card, .secret-dict-card, .timeline-card, .detective-item, .tradition-card, .letter-card, .universe-cluster, .quote-card, .memory-jar-note');
+      const cards = viewContainer.querySelectorAll('.wrapped-stat, .dict-card, .timeline-content, .detective-card, .tradition-card, .universe-card, .chapter-card, .capsule-letter-card, .search-hit-card, .jar-graphic, .jar-revealed-card');
       if (cards.length > 0) {
-        animate(cards, { opacity: [0, 1], y: [16, 0], scale: [0.96, 1] }, { delay: stagger(0.035), type: spring, damping: 26, stiffness: 340 });
+        animate(cards, { opacity: [0, 1], y: [16, 0], scale: [0.96, 1] }, { delay: stagger(0.04), type: spring, damping: 26, stiffness: 340 });
       }
     } catch (e) {}
   };

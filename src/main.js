@@ -896,7 +896,18 @@ function initApp() {
   const closeLightbox = $('#close-lightbox');
 
   let isModalAnimating = false;
+  const ensureGrabHandle = () => {
+    if (!B.querySelector('.modal-grab-handle')) {
+      const handle = document.createElement('div');
+      handle.className = 'modal-grab-handle';
+      handle.setAttribute('aria-hidden', 'true');
+      handle.onclick = hide;
+      B.insertBefore(handle, B.firstChild);
+    }
+  };
+
   const show = () => {
+    ensureGrabHandle();
     M.style.display = 'flex';
     X.style.display = 'block';
     isModalAnimating = true;
