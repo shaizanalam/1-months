@@ -35,3 +35,13 @@ Thumbs.db
 chat.md
 *.md.backup
 *.raw
+
+# Raw staging folders with long filenames & special characters (processed into public/assets/)
+asssets/
+public/asssets/
+public/assets/Base Paper & Scrapbook Textures/
+public/assets/Scene 01 & 02 Stickers/
+public/assets/Scene 03 Assets/
+public/assets/Scene 04 Assets/
+public/assets/Scene 05 & 06 Assets/
+
